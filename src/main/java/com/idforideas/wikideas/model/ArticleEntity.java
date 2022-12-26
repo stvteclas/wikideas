@@ -22,9 +22,9 @@ public class ArticleEntity {
     @NotNull
     private String title;
 
-    @Column(name = "link")
+    @Column(name = "text")
     @NotNull
-    private String link;
+    private String text;
 
     @Column(name = "creationDate")
     @CreationTimestamp
