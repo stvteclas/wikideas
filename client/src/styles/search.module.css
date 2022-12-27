@@ -1,0 +1,30 @@
+.container{
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    caret-color: transparent;
+}
+.container input{
+    padding: 4px 20px 4px 20px;
+    height: 50px;
+    border-radius: 17px;
+    background-color: rgba(255, 255, 255, 0.306);
+    width: 100%;
+    border: none;
+    caret-color: rgb(7, 7, 7);
+}
+.container input::placeholder{
+    color: #fff;
+  
+}
+.container button{
+    background-color: transparent;
+    border: none;
+    position: relative;
+    right: 45px;
+    color: #fff;
+    font-size: 30px;
+    bottom: 3px;
+    caret-color: transparent;
+}
