@@ -1,0 +1,17 @@
+.navbar-light .navbar-nav .nav-link{
+    color: rgb(245, 244, 244);
+    font-size: 22px;
+    padding-left: 2rem;
+    font-family: "Montserrat", sans-serif;
+
+   
+
+
+}
+.navbar-light .navbar-brand{
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+}
+.img_sun{
+    width: 150px;
+}
