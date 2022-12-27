@@ -27,7 +27,7 @@ public class ArticleEntity {
     @NotNull
     private String title;
 
-    @Column(name = "text")
+    @Column(name = "text", length = 429496729 )
     @NotNull
     private String text;
 
