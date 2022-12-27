@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @Entity
@@ -28,9 +29,7 @@ public class ThemeEntity {
     @UpdateTimestamp
     private LocalDateTime updateDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "idArticle", nullable = false)
-    @JsonIgnore
-    private ArticleEntity article;
+//    @OneToMany(mappedBy="theme", cascade = CascadeType.ALL)
+//    private Set<ArticleEntity> Article;
 
 }
