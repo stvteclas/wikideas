@@ -40,7 +40,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public ResponseEntity<Object> updateArticle(Long id, ArticleDTO article) {
         Optional<ArticleEntity> articleExists = Optional.ofNullable(articleRepository.findArticleByTitle(article.getTitle()));
-        if (!articleExists.isPresent()) {
+        if (articleExists.isPresent()) {
             throw new WikiException(MessageErrorEnum.INVALID_TITLE.getMessage());
         }
         ArticleEntity articleEntity = articleDAO.updateArticle(id, article);
@@ -55,7 +55,7 @@ public class ArticleServiceImpl implements ArticleService {
     public ArticleEntity getArticleByTitle(ArticleEntity article) {
         Optional<ArticleEntity> opArticle = articleDAO.getByTitle(article.getTitle());
        ArticleEntity article1 = articleDAO.findByTitle(opArticle.get().getTitle());
-        if (opArticle.isEmpty()){
+        if (!opArticle.isPresent()){
             throw new WikiException("The requested title does not exist");
         }
 
