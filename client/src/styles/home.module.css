@@ -43,12 +43,12 @@
   
   }
   .brand h2{
-    color: #fff;
+    color: rgb(0, 0, 0);
     font-family: "Open Sans", sans-serif;
     font-weight: lighter;
     font-size:20px;
     font-weight: 400;
-    background-color: rgba(44, 44, 44, 0.182);
+   
     border-radius: 20px;
     padding: 5px;
     caret-color: transparent;

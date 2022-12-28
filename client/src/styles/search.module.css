@@ -9,21 +9,26 @@
     padding: 4px 20px 4px 20px;
     height: 50px;
     border-radius: 17px;
-    background-color: rgba(255, 255, 255, 0.306);
+    background-color: rgba(53, 50, 50, 0.306);
     width: 100%;
     border: none;
     caret-color: rgb(7, 7, 7);
+    color: rgb(181, 212, 239);
+    font-family: "Inter", sans-serif;
 }
 .container input::placeholder{
-    color: #fff;
+    color: rgb(210, 209, 209);
+
+    font-family: "Inter",sans-serif;
   
 }
+
 .container button{
     background-color: transparent;
     border: none;
     position: relative;
     right: 45px;
-    color: #fff;
+    color: rgb(42, 42, 42);
     font-size: 30px;
     bottom: 3px;
     caret-color: transparent;

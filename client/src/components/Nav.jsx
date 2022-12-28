@@ -1,5 +1,5 @@
 import React from 'react';
-import oec from "../images/oec.png"
+import oec from "../images/oec-white.png"
 import"../styles/nav.css"
 
 const Nav = () => {
@@ -21,9 +21,12 @@ const Nav = () => {
                 <a className="nav-link"  href="/about">ABOUT</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/contact">CONTACT</a>
+                <a className="nav-link" href="/contact">ARTICLES</a>
               </li>
-              
+              <li className="nav-item">
+                
+               <button className='collaborate'>CREATE ARTICLE </button>
+              </li>
               
             </ul>
             

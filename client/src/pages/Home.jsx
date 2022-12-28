@@ -2,7 +2,7 @@ import React from 'react';
 import s from "../styles/home.module.css"
 import lady from "../images/lady.png"
 import castle from "../images/castle.jpg"
-import oek from "../images/oec-white.png"
+import oek from "../images/oec.png"
 import SearchBar from '../components/SearchBar';
 
 
