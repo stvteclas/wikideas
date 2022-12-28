@@ -5,6 +5,8 @@ import com.idforideas.wikideas.model.ArticleEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Component
 public class ArticleDAO {
@@ -18,4 +20,20 @@ public class ArticleDAO {
                 .build();
         return articleRepository.saveAndFlush(articleEntity);
     }
+
+    public ArticleEntity updateArticle(Long id , ArticleDTO article){
+        Optional<ArticleEntity> articleUpdate = articleRepository.findById(id);
+        articleUpdate.get().setText(article.getText());
+        articleUpdate.get().setTitle(article.getTitle());
+        return articleRepository.saveAndFlush(articleUpdate.get());
+    }
+
+    public ArticleEntity findByTitle(String title){
+        return articleRepository.findArticleByTitle(title);
+    }
+
+    public Optional<ArticleEntity> getByTitle(String title){
+        return Optional.ofNullable(articleRepository.findArticleByTitle(title));
+    }
+
 }

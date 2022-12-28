@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum MessageErrorEnum {
 
-    INVALID_THEME("Invalid theme"),
+    INVALID_TITLE("Invalid title or not exist this article"),
     ARTICLE_EXISTS("Article already exists"),
 
     MANDATORY_PARAMETERES_MISSING("Mandatory Parameters Missing"),
