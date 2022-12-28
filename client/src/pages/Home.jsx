@@ -2,7 +2,7 @@ import React from 'react';
 import s from "../styles/home.module.css"
 import lady from "../images/lady.png"
 import castle from "../images/castle.jpg"
-import oek from "../images/oec-white.png"
+import oek from "../images/oec.png"
 import SearchBar from '../components/SearchBar';
 
 
@@ -18,7 +18,7 @@ const Home = () => {
         <div className={s.search}>
             <div className={s.brand}>
                 <img src={oek} alt="" />
-                <h2>Open Collaboration Encyclopedia</h2>
+                <h2>The Open Collaboration Encyclopedia</h2>
 
             </div>
             <SearchBar/>
