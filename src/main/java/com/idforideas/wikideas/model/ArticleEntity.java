@@ -2,15 +2,20 @@ package com.idforideas.wikideas.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import lombok.*;
+import org.hibernate.annotations.*;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@Data
+@Setter
+@Getter
+@ToString
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "article")
 public class ArticleEntity {
@@ -22,7 +27,7 @@ public class ArticleEntity {
     @NotNull
     private String title;
 
-    @Column(name = "text")
+    @Column(name = "text", length = 429496729 )
     @NotNull
     private String text;
 
@@ -36,7 +41,9 @@ public class ArticleEntity {
 
     private boolean deleted = Boolean.FALSE;
 
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Set<ThemeEntity> Theme;
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "idTheme", nullable = false)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonIgnore
+//    private ThemeEntity theme;
 }

@@ -1,0 +1,18 @@
+{
+	"info": {
+		"_postman_id": "aa57be6c-9f0f-49d3-a44e-341fcf2a5a89",
+		"name": "WIKIDEAS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23768382"
+	},
+	"item": [
+		{
+			"name": "createArticle",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
