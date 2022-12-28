@@ -18,7 +18,7 @@ const Home = () => {
         <div className={s.search}>
             <div className={s.brand}>
                 <img src={oek} alt="" />
-                <h2>Open Collaboration Encyclopedia</h2>
+                <h2>The Open Collaboration Encyclopedia</h2>
 
             </div>
             <SearchBar/>
