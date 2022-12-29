@@ -34,7 +34,7 @@ public class ArticleController {
     }
 
     @GetMapping("/articles")
-    public List<ArticleResponseDTO> showAllArticles (){
+    public List<ArticleEntity> showAllArticles (){
         return articleService.showAllArticles();
     }
 

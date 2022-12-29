@@ -19,6 +19,7 @@ public class ArticleDTO {
     public ArticleDTO(ArticleEntity article1) {
     }
 
+
 //    @NotNull
 //    private String idTheme;
 }

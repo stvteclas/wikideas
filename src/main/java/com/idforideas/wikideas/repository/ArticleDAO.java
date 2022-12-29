@@ -6,6 +6,7 @@ import com.idforideas.wikideas.model.ArticleEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,12 +40,9 @@ public class ArticleDAO {
         return Optional.ofNullable(articleRepository.findArticleByTitle(title));
     }
 
-    public List<ArticleResponseDTO> getAll() {
-        List<String> articles = articleRepository.findAllArticles();
+    public List<ArticleEntity> getAll() {
+        return articleRepository.findAll();
 
-        return articles.stream()
-                .map(ArticleResponseDTO::new)
-                .collect(Collectors.toList());
     }
 
     public void deleteArticleById(Long id) {

@@ -63,7 +63,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<ArticleResponseDTO> showAllArticles() {
+    public List<ArticleEntity> showAllArticles() {
         return articleDAO.getAll();
     }
 
