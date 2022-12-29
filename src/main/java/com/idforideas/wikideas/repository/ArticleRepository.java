@@ -14,7 +14,4 @@ public interface ArticleRepository extends JpaRepository<ArticleEntity, Long> {
 
     ArticleEntity findArticleByTitle(String title);
 
-    @Query("SELECT title FROM ArticleEntity ")
-    List<String> findAllArticles();
-
 }

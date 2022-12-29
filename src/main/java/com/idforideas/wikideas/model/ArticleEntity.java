@@ -19,7 +19,6 @@ import java.util.Set;
 @Entity
 @Table(name = "article")
 @SQLDelete(sql = "UPDATE article SET deleted = true WHERE article_id = ?")
-@Where(clause = "deleted = false")
 public class ArticleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +41,6 @@ public class ArticleEntity {
     @UpdateTimestamp
     private LocalDateTime updateDate;
 
-    private boolean deleted = Boolean.FALSE;
 
 //    @ManyToOne(fetch = FetchType.LAZY, optional = false)
 //    @JoinColumn(name = "idTheme", nullable = false)
