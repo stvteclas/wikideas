@@ -18,9 +18,12 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "article")
+@SQLDelete(sql = "UPDATE article SET deleted = true WHERE article_id = ?")
+@Where(clause = "deleted = false")
 public class ArticleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "article_id")
     private Long idArticle;
 
     @Column(name = "title")

@@ -1,11 +1,14 @@
 package com.idforideas.wikideas.repository;
 
 import com.idforideas.wikideas.dto.ArticleDTO;
+import com.idforideas.wikideas.dto.ArticleResponseDTO;
 import com.idforideas.wikideas.model.ArticleEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
@@ -36,4 +39,15 @@ public class ArticleDAO {
         return Optional.ofNullable(articleRepository.findArticleByTitle(title));
     }
 
+    public List<ArticleResponseDTO> getAll() {
+        List<String> articles = articleRepository.findAllArticles();
+
+        return articles.stream()
+                .map(ArticleResponseDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    public void deleteArticleById(Long id) {
+        articleRepository.deleteById(id);
+    }
 }
