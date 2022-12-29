@@ -14,6 +14,4 @@ public interface ArticleRepository extends JpaRepository<ArticleEntity, Long> {
 
     ArticleEntity findArticleByTitle(String title);
 
-
-
 }

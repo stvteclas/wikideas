@@ -40,8 +40,11 @@ public class ArticleDAO {
         return Optional.ofNullable(articleRepository.findArticleByTitle(title));
     }
 
-    public List<ArticleEntity> getAll() {
-        return articleRepository.findAll();
+    public List<ArticleDTO> getAll() {
+        List<ArticleEntity> articles = articleRepository.findAll();
+        return articles.stream()
+                .map(ArticleDTO::new)
+                .collect(Collectors.toList());
 
     }
 

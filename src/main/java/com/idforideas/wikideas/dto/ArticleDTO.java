@@ -16,7 +16,10 @@ public class ArticleDTO {
     @NotNull
     private String text;
 
-    public ArticleDTO(ArticleEntity article1) {
+
+    public ArticleDTO(ArticleEntity article) {
+        title = article.getTitle();
+        text = article.getText();
     }
 
 
