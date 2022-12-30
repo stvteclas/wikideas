@@ -36,6 +36,11 @@ public class ArticleController {
         return articleService.getArticleByTitle(article);
     }
 
+    @GetMapping("/{id}")
+    public ArticleDTO getArticleById(@PathVariable Long id){
+        return articleService.getArticleById(id);
+    }
+
     @GetMapping("/articles")
     public List<ArticleDTO> showAllArticles (){
         return articleService.showAllArticles();

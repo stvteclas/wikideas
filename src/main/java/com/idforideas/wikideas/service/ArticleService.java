@@ -27,4 +27,6 @@ public interface ArticleService {
     void addNavigationAttributesToModel(int pageNumber, Model model, PageRequest pageRequest);
 
     ResponseEntity<Page<ArticleEntity>> showAccountsPage(PageRequest pageRequest);
+
+    ArticleDTO getArticleById(Long id);
 }
