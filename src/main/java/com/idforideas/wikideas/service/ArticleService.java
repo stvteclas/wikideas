@@ -16,4 +16,8 @@ public interface ArticleService {
 
 
     ArticleEntity getArticleByTitle(ArticleEntity article);
+
+    List<ArticleDTO> showAllArticles();
+
+    ResponseEntity<Object> deleteArticle(Long id);
 }

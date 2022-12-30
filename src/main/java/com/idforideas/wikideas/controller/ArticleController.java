@@ -33,6 +33,16 @@ public class ArticleController {
         return articleService.getArticleByTitle(article);
     }
 
+    @GetMapping("/articles")
+    public List<ArticleDTO> showAllArticles (){
+        return articleService.showAllArticles();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Object> deleteArticle(@PathVariable Long id){
+        return articleService.deleteArticle(id);
+    }
+
 
 
 

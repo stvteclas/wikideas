@@ -18,9 +18,11 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "article")
+@SQLDelete(sql = "UPDATE article SET deleted = true WHERE article_id = ?")
 public class ArticleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "article_id")
     private Long idArticle;
 
     @Column(name = "title")
@@ -39,7 +41,6 @@ public class ArticleEntity {
     @UpdateTimestamp
     private LocalDateTime updateDate;
 
-    private boolean deleted = Boolean.FALSE;
 
 //    @ManyToOne(fetch = FetchType.LAZY, optional = false)
 //    @JoinColumn(name = "idTheme", nullable = false)

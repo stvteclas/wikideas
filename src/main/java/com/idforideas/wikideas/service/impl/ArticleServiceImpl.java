@@ -3,6 +3,7 @@ package com.idforideas.wikideas.service.impl;
 import com.idforideas.wikideas.dto.ArticleDTO;
 import com.idforideas.wikideas.dto.ArticleRequestDTO;
 import com.idforideas.wikideas.dto.ArticleResponseDTO;
+import com.idforideas.wikideas.exception.GlobalExceptionHandler;
 import com.idforideas.wikideas.exception.MessageErrorEnum;
 import com.idforideas.wikideas.exception.WikiException;
 import com.idforideas.wikideas.model.ArticleEntity;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -39,10 +41,6 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public ResponseEntity<Object> updateArticle(Long id, ArticleDTO article) {
-        Optional<ArticleEntity> articleExists = Optional.ofNullable(articleRepository.findArticleByTitle(article.getTitle()));
-        if (!articleExists.isPresent()) {
-            throw new WikiException(MessageErrorEnum.INVALID_TITLE.getMessage());
-        }
         ArticleEntity articleEntity = articleDAO.updateArticle(id, article);
         ArticleDTO updateArticle = ArticleDTO.builder()
                 .title(articleEntity.getTitle())
@@ -52,15 +50,27 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ArticleEntity getArticleByTitle(ArticleEntity article) {
-        Optional<ArticleEntity> opArticle = articleDAO.getByTitle(article.getTitle());
-       ArticleEntity article1 = articleDAO.findByTitle(opArticle.get().getTitle());
-        if (opArticle.isEmpty()){
-            throw new WikiException("The requested title does not exist");
+    public ArticleEntity getArticleByTitle(ArticleEntity article)  {
+        Optional<ArticleEntity> opArticle = Optional.ofNullable(articleRepository.findArticleByTitle(article.getTitle()));
+
+        if (!opArticle.isPresent()){
+           throw new WikiException("title does not  exist");
         }
+        ArticleEntity article1 = articleDAO.findByTitle(opArticle.get().getTitle());
 
         return article1;
 
+    }
+
+    @Override
+    public List<ArticleDTO> showAllArticles() {
+        return articleDAO.getAll();
+    }
+
+    @Override
+    public ResponseEntity<Object> deleteArticle(Long id) {
+        articleDAO.deleteArticleById(id);
+        return new ResponseEntity<>("Deleted Article", HttpStatus.OK);
     }
 
 }
