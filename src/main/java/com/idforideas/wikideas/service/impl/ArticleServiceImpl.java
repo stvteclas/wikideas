@@ -11,13 +11,18 @@ import com.idforideas.wikideas.repository.ArticleDAO;
 import com.idforideas.wikideas.repository.ArticleRepository;
 import com.idforideas.wikideas.service.ArticleService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 @RequiredArgsConstructor
@@ -41,6 +46,10 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public ResponseEntity<Object> updateArticle(Long id, ArticleDTO article) {
+        Optional<ArticleEntity> opArticle = articleRepository.findById(id);
+        if (!opArticle.isPresent()){
+            throw new WikiException("article does not  exist");
+        }
         ArticleEntity articleEntity = articleDAO.updateArticle(id, article);
         ArticleDTO updateArticle = ArticleDTO.builder()
                 .title(articleEntity.getTitle())
@@ -71,6 +80,48 @@ public class ArticleServiceImpl implements ArticleService {
     public ResponseEntity<Object> deleteArticle(Long id) {
         articleDAO.deleteArticleById(id);
         return new ResponseEntity<>("Deleted Article", HttpStatus.OK);
+    }
+
+    @Override
+    public void addNavigationAttributesToModel(int pageNumber, Model model, PageRequest pageRequest) {
+        Page<ArticleEntity> pageAccounts = articleDAO.showAccountsPage(pageRequest);
+
+        int totalPages = pageAccounts.getTotalPages();
+        if(totalPages > 0){
+            List<Integer> pages = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+            model.addAttribute("pages", pages);
+            model.addAttribute("current", pageNumber+1);
+            model.addAttribute("next", pageNumber+2);
+            model.addAttribute("prev", pageNumber);
+            model.addAttribute("last", totalPages);
+        }
+
+        model.addAttribute("List", pageAccounts.getContent());
+    }
+
+    @Override
+    public ResponseEntity<Page<ArticleEntity>> showAccountsPage(PageRequest pageRequest) {
+        Page<ArticleEntity> pageAccounts = articleDAO.showAccountsPage(pageRequest);
+
+        if (pageAccounts.isEmpty()){
+            throw new WikiException("Missing page number");
+        }
+
+        return ResponseEntity.ok(pageAccounts);
+    }
+
+    @Override
+    public ArticleDTO getArticleById(Long id) {
+        Optional<ArticleEntity> opArticle = articleRepository.findById(id);
+        if (!opArticle.isPresent()){
+            throw new WikiException("article does not  exist");
+        }
+        ArticleDTO articleDTO = ArticleDTO.builder()
+                .id(opArticle.get().getIdArticle())
+                .title(opArticle.get().getTitle())
+                .text(opArticle.get().getText())
+                .build();
+        return articleDTO;
     }
 
 }
