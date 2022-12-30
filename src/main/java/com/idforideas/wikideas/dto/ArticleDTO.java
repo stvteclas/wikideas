@@ -10,6 +10,8 @@ import lombok.*;
 @Getter
 @Setter
 public class ArticleDTO {
+
+    private Long id;
     @NotNull
     private String title;
 
@@ -18,6 +20,7 @@ public class ArticleDTO {
 
 
     public ArticleDTO(ArticleEntity article) {
+        id = article.getIdArticle();
         title = article.getTitle();
         text = article.getText();
     }
