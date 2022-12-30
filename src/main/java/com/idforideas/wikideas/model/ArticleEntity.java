@@ -18,7 +18,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "article")
-@SQLDelete(sql = "UPDATE article SET deleted = true WHERE article_id = ?")
+
 public class ArticleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
