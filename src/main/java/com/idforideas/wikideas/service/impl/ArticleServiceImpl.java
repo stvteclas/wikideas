@@ -110,4 +110,18 @@ public class ArticleServiceImpl implements ArticleService {
         return ResponseEntity.ok(pageAccounts);
     }
 
+    @Override
+    public ArticleDTO getArticleById(Long id) {
+        Optional<ArticleEntity> opArticle = articleRepository.findById(id);
+        if (!opArticle.isPresent()){
+            throw new WikiException("article does not  exist");
+        }
+        ArticleDTO articleDTO = ArticleDTO.builder()
+                .id(opArticle.get().getIdArticle())
+                .title(opArticle.get().getTitle())
+                .text(opArticle.get().getText())
+                .build();
+        return articleDTO;
+    }
+
 }
