@@ -46,6 +46,10 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public ResponseEntity<Object> updateArticle(Long id, ArticleDTO article) {
+        Optional<ArticleEntity> opArticle = articleRepository.findById(id);
+        if (!opArticle.isPresent()){
+            throw new WikiException("article does not  exist");
+        }
         ArticleEntity articleEntity = articleDAO.updateArticle(id, article);
         ArticleDTO updateArticle = ArticleDTO.builder()
                 .title(articleEntity.getTitle())
