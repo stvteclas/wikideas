@@ -4,6 +4,8 @@ import com.idforideas.wikideas.dto.ArticleDTO;
 import com.idforideas.wikideas.dto.ArticleResponseDTO;
 import com.idforideas.wikideas.model.ArticleEntity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -50,5 +52,9 @@ public class ArticleDAO {
 
     public void deleteArticleById(Long id) {
         articleRepository.deleteById(id);
+    }
+
+    public Page<ArticleEntity> showAccountsPage(PageRequest pageRequest) {
+        return articleRepository.findAll(pageRequest);
     }
 }
