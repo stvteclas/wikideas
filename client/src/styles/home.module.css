@@ -6,7 +6,6 @@
     background-repeat: no-repeat;
     background-position: center;
 
-    
   }
   .lady{
     width: auto;
@@ -43,12 +42,12 @@
   
   }
   .brand h2{
-    color: #fff;
+    color: rgb(98, 72, 20);
     font-family: "Open Sans", sans-serif;
     font-weight: lighter;
     font-size:20px;
     font-weight: 400;
-    background-color: rgba(44, 44, 44, 0.182);
+   
     border-radius: 20px;
     padding: 5px;
     caret-color: transparent;

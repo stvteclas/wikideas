@@ -1,17 +1,32 @@
 .navbar-light .navbar-nav .nav-link{
-    color: rgb(245, 244, 244);
-    font-size: 22px;
-    padding-left: 2rem;
-    font-family: "Montserrat", sans-serif;
-
-   
-
-
+    color: rgb(63, 43, 5);
+    font-size: 20px;
+    padding-left: 1.3rem;
+    font-family: "Open Sans", sans-serif;
 }
 .navbar-light .navbar-brand{
-    color: rgb(255, 255, 255);
+    color: rgb(63, 43, 5);
     font-size: 30px;
 }
 .img_sun{
-    width: 150px;
+    width: 120px;
+}
+.collaborate{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px ;
+    border:none;
+    border-radius: 8px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: small;
+    position: relative;
+    left: 10px;
+    top: 8px;
+    background-color: rgb(248, 245, 221);
+}
+.collaborate:hover{
+    background-color: rgb(255, 243, 154);
+    cursor: pointer;
 }
