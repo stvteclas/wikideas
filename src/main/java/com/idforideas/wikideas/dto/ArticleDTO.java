@@ -1,5 +1,6 @@
 package com.idforideas.wikideas.dto;
 
+import com.idforideas.wikideas.model.ArticleEntity;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -14,6 +15,13 @@ public class ArticleDTO {
 
     @NotNull
     private String text;
+
+
+    public ArticleDTO(ArticleEntity article) {
+        title = article.getTitle();
+        text = article.getText();
+    }
+
 
 //    @NotNull
 //    private String idTheme;
