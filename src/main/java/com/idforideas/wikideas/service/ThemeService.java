@@ -5,5 +5,7 @@ import com.idforideas.wikideas.dto.ThemeDTO;
 import java.util.List;
 
 public interface ThemeService {
-    List<ThemeDTO> showAllArticles();
+    List<ThemeDTO> showAllThemes();
+
+    ThemeDTO getArticleById(Long id);
 }

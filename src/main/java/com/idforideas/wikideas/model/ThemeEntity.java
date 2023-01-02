@@ -20,6 +20,7 @@ import java.util.Set;
 public class ThemeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idTheme")
     private Long idTheme;
 
     @Column(name = "name")

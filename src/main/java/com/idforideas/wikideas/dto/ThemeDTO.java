@@ -11,12 +11,13 @@ import lombok.*;
 @Setter
 public class ThemeDTO {
 
-
+    private Long idTheme;
     private ThemeEnum name;
 
     private String description;
 
     public ThemeDTO(ThemeEntity theme){
+        idTheme = theme.getIdTheme();
         name = theme.getName();
         description = theme.getDescription();
     }
