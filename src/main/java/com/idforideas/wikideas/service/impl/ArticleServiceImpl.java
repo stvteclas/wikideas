@@ -35,7 +35,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public ResponseEntity<ArticleResponseDTO> createArticle(ArticleDTO article) {
-        Optional<ArticleEntity> articleExists = Optional.ofNullable(articleRepository.findArticleByTitle(article.getTitle()));
+        Optional<ArticleEntity> articleExists = articleDAO.getByTitle(article.getTitle());
         if (articleExists.isPresent()) {
             throw new WikiException(MessageErrorEnum.ARTICLE_EXISTS.getMessage());
         }
@@ -58,7 +58,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public ResponseEntity<Object> updateArticle(Long id, ArticleDTO article) {
-        Optional<ArticleEntity> opArticle = articleRepository.findById(id);
+        Optional<ArticleEntity> opArticle = articleDAO.findById(id);
         if (!opArticle.isPresent()){
             throw new WikiException("article does not  exist");
         }
@@ -71,15 +71,18 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ArticleEntity getArticleByTitle(ArticleEntity article)  {
-        Optional<ArticleEntity> opArticle = Optional.ofNullable(articleRepository.findArticleByTitle(article.getTitle()));
+    public ArticleDTO getArticleByTitle(ArticleDTO article)  {
+        Optional<ArticleEntity> opArticle = articleDAO.getByTitle(article.getTitle());;
 
         if (!opArticle.isPresent()){
            throw new WikiException("title does not  exist");
         }
-        ArticleEntity article1 = articleDAO.findByTitle(opArticle.get().getTitle());
-
-        return article1;
+    return ArticleDTO.builder()
+            .id(opArticle.get().getIdArticle())
+            .title(opArticle.get().getTitle())
+            .text(opArticle.get().getText())
+            .theme(opArticle.get().getTheme().getName())
+            .build();
 
     }
 
@@ -124,7 +127,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public ArticleDTO getArticleById(Long id) {
-        Optional<ArticleEntity> opArticle = articleRepository.findById(id);
+        Optional<ArticleEntity> opArticle = articleDAO.findById(id);
         if (!opArticle.isPresent()){
             throw new WikiException("article does not  exist");
         }
@@ -132,6 +135,7 @@ public class ArticleServiceImpl implements ArticleService {
                 .id(opArticle.get().getIdArticle())
                 .title(opArticle.get().getTitle())
                 .text(opArticle.get().getText())
+                .theme(opArticle.get().getTheme().getName())
                 .build();
         return articleDTO;
     }

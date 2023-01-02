@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,11 +18,23 @@ public class ThemeServiceImpl implements ThemeService {
 
     private final ThemeRepository themeRepository;
 
+
     @Override
-    public List<ThemeDTO> showAllArticles() {
+    public List<ThemeDTO> showAllThemes() {
         List<ThemeEntity> themes = themeRepository.findAll();
         return themes.stream()
                 .map(ThemeDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public ThemeDTO getArticleById(Long id) {
+        Optional<ThemeEntity> themeEntity = themeRepository.findById(id);
+        ThemeDTO themeDTO = ThemeDTO.builder()
+                .idTheme(themeEntity.get().getIdTheme())
+                .name(themeEntity.get().getName())
+                .description(themeEntity.get().getDescription())
+                .build();
+        return themeDTO;
     }
 }
