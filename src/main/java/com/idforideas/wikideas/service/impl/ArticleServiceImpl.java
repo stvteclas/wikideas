@@ -1,14 +1,16 @@
 package com.idforideas.wikideas.service.impl;
 
 import com.idforideas.wikideas.dto.ArticleDTO;
-import com.idforideas.wikideas.dto.ArticleRequestDTO;
 import com.idforideas.wikideas.dto.ArticleResponseDTO;
-import com.idforideas.wikideas.exception.GlobalExceptionHandler;
+import com.idforideas.wikideas.dto.ThemeDTO;
 import com.idforideas.wikideas.exception.MessageErrorEnum;
 import com.idforideas.wikideas.exception.WikiException;
 import com.idforideas.wikideas.model.ArticleEntity;
+import com.idforideas.wikideas.model.ThemeEntity;
+import com.idforideas.wikideas.model.ThemeEnum;
 import com.idforideas.wikideas.repository.ArticleDAO;
 import com.idforideas.wikideas.repository.ArticleRepository;
+import com.idforideas.wikideas.repository.ThemeRepository;
 import com.idforideas.wikideas.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -19,7 +21,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -30,13 +31,24 @@ public class ArticleServiceImpl implements ArticleService {
 
     private final ArticleDAO articleDAO;
     private final ArticleRepository articleRepository;
+    private final ThemeRepository themeRepository;
+
     @Override
     public ResponseEntity<ArticleResponseDTO> createArticle(ArticleDTO article) {
         Optional<ArticleEntity> articleExists = Optional.ofNullable(articleRepository.findArticleByTitle(article.getTitle()));
         if (articleExists.isPresent()) {
             throw new WikiException(MessageErrorEnum.ARTICLE_EXISTS.getMessage());
         }
-        ArticleEntity articleEntity = articleDAO.createArticle(article);
+        Optional<ThemeEnum> theme1 = Optional.ofNullable(article.getTheme());
+        if (!theme1.isPresent()){
+            throw new WikiException(MessageErrorEnum.INVALID_THEME.getMessage());
+        }
+        ThemeDTO themeDTO = ThemeDTO.builder()
+                .name(article.getTheme())
+                .description(String.valueOf(article.getTheme()))
+                .build();
+
+        ArticleEntity articleEntity = articleDAO.createArticle(article, themeDTO);
         ArticleResponseDTO response = ArticleResponseDTO.builder()
                 .title(articleEntity.getTitle())
                 .build();
@@ -50,11 +62,11 @@ public class ArticleServiceImpl implements ArticleService {
         if (!opArticle.isPresent()){
             throw new WikiException("article does not  exist");
         }
-        ArticleEntity articleEntity = articleDAO.updateArticle(id, article);
-        ArticleDTO updateArticle = ArticleDTO.builder()
-                .title(articleEntity.getTitle())
-                .text(articleEntity.getText())
+        ThemeDTO themeDTO = ThemeDTO.builder()
+                .name(article.getTheme())
+                .description(String.valueOf(article.getTheme()))
                 .build();
+        ArticleEntity articleEntity = articleDAO.updateArticle(id, article, themeDTO);
         return new ResponseEntity<>("updated article", HttpStatus.OK);
     }
 
