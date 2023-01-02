@@ -2,23 +2,34 @@ package com.idforideas.wikideas.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Data;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "Theme")
+@Table(name = "themes")
 public class ThemeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idTheme")
     private Long idTheme;
 
-    private String name;
+    @Column(name = "name")
+    @NotNull
+    @Enumerated (value = EnumType.STRING)
+    private ThemeEnum name;
 
+    @Column(name = "description")
+    @NotNull
     private String description;
 
     @Column(name = "creationDate")
@@ -29,7 +40,7 @@ public class ThemeEntity {
     @UpdateTimestamp
     private LocalDateTime updateDate;
 
-//    @OneToMany(mappedBy="theme", cascade = CascadeType.ALL)
-//    private Set<ArticleEntity> Article;
+    @OneToMany(mappedBy="theme",fetch = FetchType.LAZY)
+    private Set<ArticleEntity> Article;
 
 }

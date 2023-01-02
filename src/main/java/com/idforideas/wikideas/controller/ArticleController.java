@@ -32,7 +32,7 @@ public class ArticleController {
     }
 
     @GetMapping
-    public ArticleEntity getArticleByTitle(@RequestBody ArticleEntity article){
+    public ArticleDTO getArticleByTitle(@RequestBody ArticleDTO article){
         return articleService.getArticleByTitle(article);
     }
 

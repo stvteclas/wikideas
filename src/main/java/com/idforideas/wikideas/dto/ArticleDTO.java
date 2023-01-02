@@ -1,6 +1,9 @@
 package com.idforideas.wikideas.dto;
 
 import com.idforideas.wikideas.model.ArticleEntity;
+import com.idforideas.wikideas.model.ThemeEnum;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -12,17 +15,17 @@ import lombok.*;
 public class ArticleDTO {
 
     private Long id;
-    @NotNull
     private String title;
-
-    @NotNull
     private String text;
+    @Enumerated(value = EnumType.STRING)
+    private ThemeEnum theme;
 
 
     public ArticleDTO(ArticleEntity article) {
         id = article.getIdArticle();
         title = article.getTitle();
         text = article.getText();
+        theme = article.getTheme().getName();
     }
 
 

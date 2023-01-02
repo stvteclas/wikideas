@@ -18,7 +18,7 @@ public interface ArticleService {
     ResponseEntity<Object> updateArticle(Long id, ArticleDTO article);
 
 
-    ArticleEntity getArticleByTitle(ArticleEntity article);
+    ArticleDTO getArticleByTitle(ArticleDTO article);
 
     List<ArticleDTO> showAllArticles();
 

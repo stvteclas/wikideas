@@ -41,10 +41,9 @@ public class ArticleEntity {
     @UpdateTimestamp
     private LocalDateTime updateDate;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
+    @JoinColumn(name="idTheme")
+    private ThemeEntity theme;
 
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "idTheme", nullable = false)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private ThemeEntity theme;
 }
