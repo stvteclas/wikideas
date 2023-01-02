@@ -2,7 +2,12 @@ package com.idforideas.wikideas.repository;
 
 import com.idforideas.wikideas.dto.ArticleDTO;
 import com.idforideas.wikideas.dto.ArticleResponseDTO;
+import com.idforideas.wikideas.dto.ThemeDTO;
+import com.idforideas.wikideas.exception.MessageErrorEnum;
+import com.idforideas.wikideas.exception.WikiException;
 import com.idforideas.wikideas.model.ArticleEntity;
+import com.idforideas.wikideas.model.ThemeEntity;
+import com.idforideas.wikideas.model.ThemeEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,19 +23,24 @@ import java.util.stream.Collectors;
 public class ArticleDAO {
 
     private final ArticleRepository articleRepository;
+    private final ThemeRepository themeRepository;
 
-    public ArticleEntity createArticle(ArticleDTO article){
+    public ArticleEntity createArticle(ArticleDTO article, ThemeDTO theme){
+        ThemeEntity themeEntity = getTheme(theme);
         ArticleEntity articleEntity = ArticleEntity.builder()
                 .title(article.getTitle())
                 .text(article.getText())
+                .theme(themeEntity)
                 .build();
         return articleRepository.saveAndFlush(articleEntity);
     }
 
-    public ArticleEntity updateArticle(Long id , ArticleDTO article){
+    public ArticleEntity updateArticle(Long id, ArticleDTO article, ThemeDTO theme){
         Optional<ArticleEntity> articleUpdate = articleRepository.findById(id);
+       ThemeEntity themeEntity = getTheme(theme);
         articleUpdate.get().setText(article.getText());
         articleUpdate.get().setTitle(article.getTitle());
+        articleUpdate.get().setTheme(themeEntity);
         return articleRepository.saveAndFlush(articleUpdate.get());
     }
 
@@ -56,5 +66,19 @@ public class ArticleDAO {
 
     public Page<ArticleEntity> showAccountsPage(PageRequest pageRequest) {
         return articleRepository.findAll(pageRequest);
+    }
+
+    public ThemeEntity getTheme(ThemeDTO theme) {
+        Optional<ThemeEntity> themeEntity = Optional.ofNullable(themeRepository.findByName(theme.getName()));
+
+        if (!themeEntity.isPresent()) {
+          ThemeEntity theme1 = ThemeEntity.builder()
+                  .name(theme.getName())
+                  .description(theme.getDescription())
+                  .build();
+            themeRepository.saveAndFlush(theme1);
+            return theme1;
+        }
+        return themeEntity.get();
     }
 }
