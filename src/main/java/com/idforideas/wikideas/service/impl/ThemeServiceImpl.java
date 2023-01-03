@@ -28,11 +28,11 @@ public class ThemeServiceImpl implements ThemeService {
     }
 
     @Override
-    public ThemeDTO getArticleById(Long id) {
+    public ThemeDTO getThemeById(Long id) {
         Optional<ThemeEntity> themeEntity = themeRepository.findById(id);
         ThemeDTO themeDTO = ThemeDTO.builder()
                 .idTheme(themeEntity.get().getIdTheme())
-                .name(themeEntity.get().getName())
+                .theme(themeEntity.get().getTheme())
                 .description(themeEntity.get().getDescription())
                 .build();
         return themeDTO;
