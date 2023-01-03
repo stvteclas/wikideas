@@ -32,12 +32,12 @@ public class ArticleController {
     }
 
     @GetMapping
-    public ArticleDTO getArticleByTitle(@RequestBody ArticleDTO article){
+    public ArticleResponseDTO getArticleByTitle(@RequestBody ArticleDTO article){
         return articleService.getArticleByTitle(article);
     }
 
     @GetMapping("/{id}")
-    public ArticleDTO getArticleById(@PathVariable Long id){
+    public ArticleResponseDTO getArticleById(@PathVariable Long id){
         return articleService.getArticleById(id);
     }
 

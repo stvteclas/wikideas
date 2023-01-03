@@ -30,6 +30,7 @@ public class ArticleDAO {
                 .title(article.getTitle())
                 .text(article.getText())
                 .theme(themeEntity)
+                .image(article.getImage())
                 .build();
         return articleRepository.saveAndFlush(articleEntity);
     }
@@ -39,6 +40,7 @@ public class ArticleDAO {
        ThemeEntity themeEntity = getTheme(theme);
         articleUpdate.get().setText(article.getText());
         articleUpdate.get().setTitle(article.getTitle());
+        articleUpdate.get().setImage(article.getImage());
         articleUpdate.get().setTheme(themeEntity);
         return articleRepository.saveAndFlush(articleUpdate.get());
     }

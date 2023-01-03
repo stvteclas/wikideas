@@ -18,7 +18,7 @@ public interface ArticleService {
     ResponseEntity<Object> updateArticle(Long id, ArticleDTO article);
 
 
-    ArticleDTO getArticleByTitle(ArticleDTO article);
+    ArticleResponseDTO getArticleByTitle(ArticleDTO article);
 
     List<ArticleDTO> showAllArticles();
 
@@ -28,5 +28,5 @@ public interface ArticleService {
 
     ResponseEntity<Page<ArticleEntity>> showAccountsPage(PageRequest pageRequest);
 
-    ArticleDTO getArticleById(Long id);
+    ArticleResponseDTO getArticleById(Long id);
 }
