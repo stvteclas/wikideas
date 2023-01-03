@@ -31,7 +31,7 @@ public class ArticleResponseDTO {
         id = article.getIdArticle();
         title = article.getTitle();
         text = article.getText();
-        theme = article.getTheme().getName();
+        theme = article.getTheme().getTheme();
         image = article.getImage();
         creationDate = article.getCreationDate();
         updateDate = article.getUpdateDate();

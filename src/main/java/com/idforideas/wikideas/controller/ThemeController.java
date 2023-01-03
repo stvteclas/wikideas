@@ -24,8 +24,8 @@ public class ThemeController {
     }
 
     @GetMapping("/{id}")
-    public ThemeDTO getArticleById(@PathVariable Long id){
-        return themeService.getArticleById(id);
+    public ThemeDTO getThemeById(@PathVariable Long id){
+        return themeService.getThemeById(id);
     }
 
 }

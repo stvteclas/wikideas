@@ -56,7 +56,7 @@ public enum ThemeEnum {
     SERIES("SERIES", 48L),
     PELICULAS("PELICULAS", 49L),
     PROGRAMAS_TV("PROGRAMAS TV", 50L);
-    private String name;
+    private String theme;
     private Long id;
 
 }

@@ -25,7 +25,7 @@ public class ArticleDTO {
         id = article.getIdArticle();
         title = article.getTitle();
         text = article.getText();
-        theme = article.getTheme().getName();
+        theme = article.getTheme().getTheme();
         image = article.getImage();
     }
 }
