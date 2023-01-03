@@ -17,12 +17,9 @@ public class ArticleDTO {
     private Long id;
     private String title;
     private String text;
-
     private String image;
-
     @Enumerated(value = EnumType.STRING)
     private ThemeEnum theme;
-
 
     public ArticleDTO(ArticleEntity article) {
         id = article.getIdArticle();
@@ -31,8 +28,4 @@ public class ArticleDTO {
         theme = article.getTheme().getName();
         image = article.getImage();
     }
-
-
-//    @NotNull
-//    private String idTheme;
 }

@@ -44,8 +44,8 @@ public class ArticleServiceImpl implements ArticleService {
             throw new WikiException(MessageErrorEnum.INVALID_THEME.getMessage());
         }
         ThemeDTO themeDTO = ThemeDTO.builder()
-                .name(article.getTheme())
-                .description(String.valueOf(article.getTheme()))
+                .name(theme1.get())
+                .description(theme1.get().getName())
                 .build();
 
         ArticleEntity articleEntity = articleDAO.createArticle(article, themeDTO);
@@ -55,6 +55,8 @@ public class ArticleServiceImpl implements ArticleService {
                 .image(articleEntity.getImage())
                 .creationDate(articleEntity.getCreationDate())
                 .title(articleEntity.getTitle())
+                .theme(articleEntity.getTheme().getName())
+                .updateDate(articleEntity.getUpdateDate())
                 .build();
         return new ResponseEntity<>(response, HttpStatus.CREATED);
 
@@ -77,6 +79,8 @@ public class ArticleServiceImpl implements ArticleService {
                 .image(articleEntity.getImage())
                 .creationDate(articleEntity.getCreationDate())
                 .title(articleEntity.getTitle())
+                .theme(articleEntity.getTheme().getName())
+                .updateDate(articleEntity.getUpdateDate())
                 .build();
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
