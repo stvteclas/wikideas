@@ -17,6 +17,9 @@ public class ArticleDTO {
     private Long id;
     private String title;
     private String text;
+
+    private String image;
+
     @Enumerated(value = EnumType.STRING)
     private ThemeEnum theme;
 
@@ -26,6 +29,7 @@ public class ArticleDTO {
         title = article.getTitle();
         text = article.getText();
         theme = article.getTheme().getName();
+        image = article.getImage();
     }
 
 
