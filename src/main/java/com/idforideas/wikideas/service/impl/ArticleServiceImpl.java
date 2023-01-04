@@ -6,7 +6,6 @@ import com.idforideas.wikideas.dto.ThemeDTO;
 import com.idforideas.wikideas.exception.MessageErrorEnum;
 import com.idforideas.wikideas.exception.WikiException;
 import com.idforideas.wikideas.model.ArticleEntity;
-import com.idforideas.wikideas.model.ThemeEntity;
 import com.idforideas.wikideas.model.ThemeEnum;
 import com.idforideas.wikideas.repository.ArticleDAO;
 import com.idforideas.wikideas.repository.ArticleRepository;
@@ -44,13 +43,19 @@ public class ArticleServiceImpl implements ArticleService {
             throw new WikiException(MessageErrorEnum.INVALID_THEME.getMessage());
         }
         ThemeDTO themeDTO = ThemeDTO.builder()
-                .name(article.getTheme())
-                .description(String.valueOf(article.getTheme()))
+                .theme(theme1.get())
+                .description(theme1.get().getTheme())
                 .build();
 
         ArticleEntity articleEntity = articleDAO.createArticle(article, themeDTO);
         ArticleResponseDTO response = ArticleResponseDTO.builder()
+                .text(articleEntity.getText())
+                .id(articleEntity.getIdArticle())
+                .image(articleEntity.getImage())
+                .creationDate(articleEntity.getCreationDate())
                 .title(articleEntity.getTitle())
+                .theme(articleEntity.getTheme().getTheme())
+                .updateDate(articleEntity.getUpdateDate())
                 .build();
         return new ResponseEntity<>(response, HttpStatus.CREATED);
 
@@ -63,25 +68,37 @@ public class ArticleServiceImpl implements ArticleService {
             throw new WikiException("article does not  exist");
         }
         ThemeDTO themeDTO = ThemeDTO.builder()
-                .name(article.getTheme())
+                .theme(article.getTheme())
                 .description(String.valueOf(article.getTheme()))
                 .build();
         ArticleEntity articleEntity = articleDAO.updateArticle(id, article, themeDTO);
-        return new ResponseEntity<>("updated article", HttpStatus.OK);
+        ArticleResponseDTO response = ArticleResponseDTO.builder()
+                .text(articleEntity.getText())
+                .id(articleEntity.getIdArticle())
+                .image(articleEntity.getImage())
+                .creationDate(articleEntity.getCreationDate())
+                .title(articleEntity.getTitle())
+                .theme(articleEntity.getTheme().getTheme())
+                .updateDate(articleEntity.getUpdateDate())
+                .build();
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @Override
-    public ArticleDTO getArticleByTitle(ArticleDTO article)  {
+    public ArticleResponseDTO getArticleByTitle(ArticleDTO article)  {
         Optional<ArticleEntity> opArticle = articleDAO.getByTitle(article.getTitle());;
 
         if (!opArticle.isPresent()){
            throw new WikiException("title does not  exist");
         }
-    return ArticleDTO.builder()
+    return ArticleResponseDTO.builder()
             .id(opArticle.get().getIdArticle())
             .title(opArticle.get().getTitle())
             .text(opArticle.get().getText())
-            .theme(opArticle.get().getTheme().getName())
+            .image(opArticle.get().getImage())
+            .creationDate(opArticle.get().getCreationDate())
+            .updateDate(opArticle.get().getUpdateDate())
+            .theme(opArticle.get().getTheme().getTheme())
             .build();
 
     }
@@ -126,18 +143,26 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ArticleDTO getArticleById(Long id) {
+    public ArticleResponseDTO getArticleById(Long id) {
         Optional<ArticleEntity> opArticle = articleDAO.findById(id);
         if (!opArticle.isPresent()){
             throw new WikiException("article does not  exist");
         }
-        ArticleDTO articleDTO = ArticleDTO.builder()
+        ArticleResponseDTO articleResponseDTO = ArticleResponseDTO.builder()
                 .id(opArticle.get().getIdArticle())
                 .title(opArticle.get().getTitle())
                 .text(opArticle.get().getText())
-                .theme(opArticle.get().getTheme().getName())
+                .image(opArticle.get().getImage())
+                .creationDate(opArticle.get().getCreationDate())
+                .updateDate(opArticle.get().getUpdateDate())
+                .theme(opArticle.get().getTheme().getTheme())
                 .build();
-        return articleDTO;
+        return articleResponseDTO;
+    }
+
+    @Override
+    public List<ArticleDTO> showArticlesByTheme(ThemeDTO theme) {
+        return articleDAO.showArticlesByTheme(theme);
     }
 
 }

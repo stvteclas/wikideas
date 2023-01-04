@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface ThemeRepository extends JpaRepository<ThemeEntity, Long> {
-    ThemeEntity findByName(ThemeEnum theme);
+    ThemeEntity findByTheme(ThemeEnum theme);
 }

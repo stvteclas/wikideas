@@ -1,4 +1,4 @@
-INSERT INTO themes (name, description)
+INSERT INTO themes (theme, description)
 VALUES
     ( 'ACTUALIDAD', 'ACTUALIDAD'),
     ('AGRICULTURA','AGRICULTURA'),

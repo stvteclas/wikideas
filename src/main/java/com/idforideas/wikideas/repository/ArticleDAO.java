@@ -2,6 +2,8 @@ package com.idforideas.wikideas.repository;
 
 import com.idforideas.wikideas.dto.ArticleDTO;
 import com.idforideas.wikideas.dto.ThemeDTO;
+import com.idforideas.wikideas.exception.MessageErrorEnum;
+import com.idforideas.wikideas.exception.WikiException;
 import com.idforideas.wikideas.model.ArticleEntity;
 import com.idforideas.wikideas.model.ThemeEntity;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +32,7 @@ public class ArticleDAO {
                 .title(article.getTitle())
                 .text(article.getText())
                 .theme(themeEntity)
+                .image(article.getImage())
                 .build();
         return articleRepository.saveAndFlush(articleEntity);
     }
@@ -39,6 +42,7 @@ public class ArticleDAO {
        ThemeEntity themeEntity = getTheme(theme);
         articleUpdate.get().setText(article.getText());
         articleUpdate.get().setTitle(article.getTitle());
+        articleUpdate.get().setImage(article.getImage());
         articleUpdate.get().setTheme(themeEntity);
         return articleRepository.saveAndFlush(articleUpdate.get());
     }
@@ -64,16 +68,30 @@ public class ArticleDAO {
     }
 
     public ThemeEntity getTheme(ThemeDTO theme) {
-        Optional<ThemeEntity> themeEntity = Optional.ofNullable(themeRepository.findByName(theme.getName()));
+
+        Optional<ThemeEntity> themeEntity = Optional.ofNullable(themeRepository.findByTheme(theme.getTheme()));
 
         if (!themeEntity.isPresent()) {
           ThemeEntity theme1 = ThemeEntity.builder()
-                  .name(theme.getName())
+                  .theme(theme.getTheme())
                   .description(theme.getDescription())
                   .build();
             themeRepository.saveAndFlush(theme1);
             return theme1;
         }
         return themeEntity.get();
+    }
+
+    public List<ArticleDTO> showArticlesByTheme(ThemeDTO theme) {
+        Optional<ThemeEntity> themeEntity = Optional.ofNullable(themeRepository.findByTheme(theme.getTheme()));
+
+       if (!themeEntity.isPresent()){
+            throw new WikiException(MessageErrorEnum.INVALID_THEME.getMessage());
+        }
+
+        List<ArticleEntity> articles = articleRepository.findByTheme(themeEntity.get());
+        return articles.stream()
+                .map(ArticleDTO::new)
+                .collect(Collectors.toList());
     }
 }

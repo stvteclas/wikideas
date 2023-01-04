@@ -33,6 +33,10 @@ public class ArticleEntity {
     @NotNull
     private String text;
 
+    @Column(name = "image")
+    @NotNull
+    private String image;
+
     @Column(name = "creationDate")
     @CreationTimestamp
     private LocalDateTime creationDate;
