@@ -1,0 +1,288 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    height: auto;
+    background-image: linear-gradient(rgba(202, 199, 189, 0.682), rgba(208, 208, 206, 0.14)), url("https://img.freepik.com/foto-gratis/cafe-libros-cerca-mujer-leyendo_23-2147863764.jpg?w=1060&t=st=1672887606~exp=1672888206~hmac=f862a9e34ed81a0ba721f4daaece5f85d33236ab260921b50668a3285b94db87");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+
+
+
+}
+
+.wraper {
+    width: 900px;
+    min-width: 350px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    height: 500px;
+    background-color: #fff;
+    padding: 10px;
+    gap: 20px;
+    border-radius: 20px;
+    margin-top: 10%;
+    margin-bottom: 100px;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+
+}
+
+.right {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    caret-color: transparent;
+    position: relative;
+}
+
+.right img {
+    width: 80px;
+    border-radius: 12px;
+}
+
+.left {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+ background-size: contain;
+}
+
+.input_container {
+    background-color: transparent;
+
+
+}
+
+.form {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: end;
+}
+
+.input_text {
+    font-family: "Inter";
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid rgb(246, 243, 243);
+    outline: 0;
+    font-size: 13px;
+    color: #fff;
+    background: transparent;
+    transition: border-color 0.2s;
+    margin: 8px;
+
+}
+
+.input_text::placeholder {
+    color: rgba(255, 255, 255, 0.625);
+}
+
+.image_input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    caret-color: transparent;
+
+}
+
+.image_input button {
+    color: #fff;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.image_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.image_btn p {
+    color: #fff;
+    font-family: "Dosis", sans-serif;
+    caret-color: transparent;
+    font-size: medium;
+    font-weight: lighter;
+}
+
+.form h4 {
+    color: rgb(116, 79, 0);
+    width: 100%;
+    font-family: "Dosis", sans-serif;
+    margin-top: 20px;
+
+
+}
+
+.selects_container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    margin: 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.categories {
+    width: 100%;
+}
+
+.selects_container select {
+    color: rgb(182, 179, 179);
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: "Inter", sans-serif;
+    position: relative;
+    justify-content: flex-start;
+    justify-items: flex-start;
+    display: flex;
+    width: 60%;
+    height: 2.5em;
+    line-height: 3;
+    background: #86818100;
+    border: none;
+    overflow: hidden;
+    border-radius: 4px;
+    margin-right: 110px;
+}
+
+.select_style {
+    background: #222;
+}
+
+.create_btn {
+    background-color: #ead2b8;
+    color: rgb(94, 94, 94);
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 2px;
+    caret-color: transparent;
+    font-size: small;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.create_btn:hover {
+    background-color: #bd9e7d;
+}
+
+.errors {
+    color: rgb(228, 97, 97);
+    padding: 10px;
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+}
+
+.categories_option {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    right: 100px;
+}
+
+.categories_option button {
+    color: rgba(253, 87, 87, 0.644);
+    font-size: medium;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.categories_option p {
+    color: #fff;
+    font-size: small;
+    font-weight: bold;
+}
+
+.show_btn {
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    gap: 1rem;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.625);
+}
+
+.show_btn label {
+    font-size: small;
+}
+
+.show_btn button {
+    color: rgba(255, 255, 255, 0.625);
+    cursor: pointer;
+}
+
+.button_container {
+    width: min-content;
+    position: absolute;
+    left: 15px;
+    top: 8rem;
+}
+
+.back {
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .wraper {
+        width: 90%;
+        min-width: 340px;
+        flex-direction: column;
+        height: auto;
+    }
+
+    .create_btn {
+        margin-bottom: 20px;
+    }
+
+    .form h4 {
+        color: #fff;
+        font-family: "Inter", sans-serif;
+        margin-top: 30px;
+    }
+
+    .form {
+        width: 90%;
+        padding: 20px;
+    }
+
+}
+
+.back {
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

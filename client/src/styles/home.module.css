@@ -4,7 +4,8 @@
     height: 100vh;
     background-size:cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: bottom;
+    background-image: linear-gradient(rgba(223, 222, 222, 0.606),rgba(246, 247, 246, 0.044)), url("https://img.freepik.com/foto-gratis/libro-abierto-fondo-blanco_23-2148882765.jpg?w=1380&t=st=1672724000~exp=1672724600~hmac=41d85f741900bc9501fa99d64c14d49c8b0e2e1627094c21b06241caa97044d8"); 
 
   }
   .lady{
