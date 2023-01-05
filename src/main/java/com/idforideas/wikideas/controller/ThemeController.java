@@ -1,6 +1,5 @@
 package com.idforideas.wikideas.controller;
 
-import com.idforideas.wikideas.dto.ArticleDTO;
 import com.idforideas.wikideas.dto.ThemeDTO;
 import com.idforideas.wikideas.service.ThemeService;
 import lombok.RequiredArgsConstructor;
