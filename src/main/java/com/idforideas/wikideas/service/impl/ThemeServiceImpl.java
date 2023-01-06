@@ -1,6 +1,7 @@
 package com.idforideas.wikideas.service.impl;
 
 import com.idforideas.wikideas.dto.ThemeDTO;
+import com.idforideas.wikideas.exception.WikiException;
 import com.idforideas.wikideas.model.ThemeEntity;
 import com.idforideas.wikideas.repository.ThemeRepository;
 import com.idforideas.wikideas.service.ThemeService;
@@ -30,6 +31,9 @@ public class ThemeServiceImpl implements ThemeService {
     @Override
     public ThemeDTO getThemeById(Long id) {
         Optional<ThemeEntity> themeEntity = themeRepository.findById(id);
+        if (!themeEntity.isPresent()){
+            throw new WikiException("id theme does not  exist");
+        }
         ThemeDTO themeDTO = ThemeDTO.builder()
                 .idTheme(themeEntity.get().getIdTheme())
                 .theme(themeEntity.get().getTheme())

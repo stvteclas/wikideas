@@ -1,5 +1,9 @@
 package com.idforideas.wikideas.model;
 
+import com.idforideas.wikideas.dto.validator.IValidatorArticle;
+import com.idforideas.wikideas.dto.validator.IValidatorTheme;
+import com.idforideas.wikideas.utils.DTOValidator;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
