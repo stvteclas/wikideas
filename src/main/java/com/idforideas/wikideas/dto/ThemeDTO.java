@@ -16,7 +16,6 @@ import lombok.*;
 public class ThemeDTO {
     @NotBlank(groups= {IValidatorTheme.class})
     private Long idTheme;
-    @NotBlank(groups= {IValidatorTheme.class})
     private ThemeEnum theme;
     @NotBlank(groups= {IValidatorTheme.class})
     private String description;
