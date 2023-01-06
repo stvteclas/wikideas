@@ -3,6 +3,7 @@ package com.idforideas.wikideas.service.impl;
 import com.idforideas.wikideas.dto.ArticleDTO;
 import com.idforideas.wikideas.dto.ArticleResponseDTO;
 import com.idforideas.wikideas.dto.ThemeDTO;
+import com.idforideas.wikideas.dto.validator.IValidatorArticle;
 import com.idforideas.wikideas.exception.MessageErrorEnum;
 import com.idforideas.wikideas.exception.WikiException;
 import com.idforideas.wikideas.model.ArticleEntity;
@@ -11,6 +12,7 @@ import com.idforideas.wikideas.repository.ArticleDAO;
 import com.idforideas.wikideas.repository.ArticleRepository;
 import com.idforideas.wikideas.repository.ThemeRepository;
 import com.idforideas.wikideas.service.ArticleService;
+import com.idforideas.wikideas.utils.DTOValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,6 +36,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public ResponseEntity<ArticleResponseDTO> createArticle(ArticleDTO article) {
+        DTOValidator.validate(article, IValidatorArticle.class);
         Optional<ArticleEntity> articleExists = articleDAO.getByTitle(article.getTitle());
         if (articleExists.isPresent()) {
             throw new WikiException(MessageErrorEnum.ARTICLE_EXISTS.getMessage());
@@ -63,6 +66,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public ResponseEntity<Object> updateArticle(Long id, ArticleDTO article) {
+        DTOValidator.validate(article, IValidatorArticle.class);
         Optional<ArticleEntity> opArticle = articleDAO.findById(id);
         if (!opArticle.isPresent()){
             throw new WikiException("article does not  exist");
