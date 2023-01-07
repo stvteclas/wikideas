@@ -24,7 +24,7 @@ VALUES
     ('DEPORTES','DEPORTES'),
     ('FUTBOL','FUTBOL'),
     ('DERECHO','DERECHO'),
-    ('DISEÑO','DISEÑO'),
+    ('DISENIO','DISENIO'),
     ('ECONOMIA','ECONOMIA'),
     ('EMPRESA','EMPRESA'),
     ('EDUCACION','EDUCACION'),
