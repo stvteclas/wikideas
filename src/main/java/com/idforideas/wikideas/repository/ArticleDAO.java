@@ -29,7 +29,7 @@ public class ArticleDAO {
     public ArticleEntity createArticle(ArticleDTO article, ThemeDTO theme){
         ThemeEntity themeEntity = getTheme(theme);
         ArticleEntity articleEntity = ArticleEntity.builder()
-                .title(article.getTitle())
+                .title(article.getTitle().toUpperCase())
                 .text(article.getText())
                 .theme(themeEntity)
                 .image(article.getImage())
@@ -41,14 +41,14 @@ public class ArticleDAO {
         Optional<ArticleEntity> articleUpdate = articleRepository.findById(id);
        ThemeEntity themeEntity = getTheme(theme);
         articleUpdate.get().setText(article.getText());
-        articleUpdate.get().setTitle(article.getTitle());
+        articleUpdate.get().setTitle(article.getTitle().toUpperCase());
         articleUpdate.get().setImage(article.getImage());
         articleUpdate.get().setTheme(themeEntity);
         return articleRepository.saveAndFlush(articleUpdate.get());
     }
 
     public Optional<ArticleEntity> getByTitle(String title){
-        return Optional.ofNullable(articleRepository.findArticleByTitle(title));
+        return Optional.ofNullable(articleRepository.findArticleByTitle(title.toUpperCase()));
     }
 
     public List<ArticleDTO> getAll() {
