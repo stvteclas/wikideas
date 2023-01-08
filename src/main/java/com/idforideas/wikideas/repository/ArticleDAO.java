@@ -47,8 +47,18 @@ public class ArticleDAO {
         return articleRepository.saveAndFlush(articleUpdate.get());
     }
 
-    public Optional<ArticleEntity> getByTitle(String title){
-        return Optional.ofNullable(articleRepository.findArticleByTitle(title));
+    public Optional<ArticleEntity> getByTitle(ArticleDTO article){
+        List<ArticleEntity> articles = articleRepository.findAll();
+        String articleTest="";
+
+        for (int i=0; i< articles.size();i++){
+            if (article.getTitle().equalsIgnoreCase(articles.get(i).getTitle())){
+                articleTest = articles.get(i).getTitle();
+                return Optional.ofNullable(articles.get(i));
+            }
+        }
+
+        return Optional.ofNullable(articleRepository.findArticleByTitle(articleTest));
     }
 
     public List<ArticleDTO> getAll() {

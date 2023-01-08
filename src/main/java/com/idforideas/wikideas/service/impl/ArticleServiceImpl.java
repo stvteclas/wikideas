@@ -37,7 +37,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public ResponseEntity<ArticleResponseDTO> createArticle(ArticleDTO article) {
         DTOValidator.validate(article, IValidatorArticle.class);
-        Optional<ArticleEntity> articleExists = articleDAO.getByTitle(article.getTitle());
+        Optional<ArticleEntity> articleExists = articleDAO.getByTitle(article);
         if (articleExists.isPresent()) {
             throw new WikiException(MessageErrorEnum.ARTICLE_EXISTS.getMessage());
         }
@@ -90,8 +90,8 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public ArticleResponseDTO getArticleByTitle(ArticleDTO article)  {
-        Optional<ArticleEntity> opArticle = articleDAO.getByTitle(article.getTitle());;
 
+        Optional<ArticleEntity> opArticle = articleDAO.getByTitle(article);
         if (!opArticle.isPresent()){
            throw new WikiException("title does not  exist");
         }
