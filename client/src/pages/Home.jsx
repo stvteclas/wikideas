@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import s from "../styles/home.module.css"
 import castle from "../images/castle.jpg"
 import oek from "../images/oec.png"
 import SearchBar from '../components/SearchBar';
+import { useDispatch, useSelector } from 'react-redux';
+import { getArticles } from '../redux/actions';
 
 
 const Home = () => {
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+   dispatch(getArticles())
+
+  },[])
+  const articles = useSelector((state)=>state.articlesReducers.articles)
+  console.log(articles)
+
     return (
       <div
         className={s.container}
