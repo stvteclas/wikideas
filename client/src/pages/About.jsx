@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "../styles/about.module.css"
-import street from "../images/street.jpg"
+
 
 import oek from "../images/oec-white.png"
 import{AiFillGithub}from "react-icons/ai"
@@ -8,7 +8,7 @@ const About = () => {
     return (
       <div
         className={s.container}
-        style={{ backgroundImage: `url(${street})` }}
+       
       >
         <div className={s.wraper}>
         {/* <div className={s.right}>

@@ -8,6 +8,8 @@
     justify-content: center;
     align-items: center;
 caret-color: transparent;
+background-image: linear-gradient(rgba(223, 222, 222, 0.606),rgba(156, 157, 156, 0.395)), url("https://img.freepik.com/foto-gratis/surtido-creativo-diferentes-libros_23-2148851019.jpg?w=1060&t=st=1672722564~exp=1672723164~hmac=cfb446540cc3da5e09e300911b56cdc0b9dc930400b5dc4a157c004ad5ac57c8"); 
+
     
   }
   .wraper{
@@ -29,10 +31,10 @@ height: 100vh;
 
   }
   .left_container{
-    background-color: rgba(255, 255, 255, 0.251);
-    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.614);
+    padding: 100px;
     border-radius: 12px;
-    width:40vw;
+    width:60vw;
     height: auto;
     margin-top: 2rem;
   }

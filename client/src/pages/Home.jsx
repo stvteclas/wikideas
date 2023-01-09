@@ -9,7 +9,7 @@ const Home = () => {
     return (
       <div
         className={s.container}
-        style={{ backgroundImage: `url(${castle})` }}
+        
       >
         {/* <div className={s.image_container}>
           <img src={lady} className={s.lady} alt="" />
