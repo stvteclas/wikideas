@@ -25,8 +25,17 @@ public class ArticleDAO {
     public Optional<ArticleEntity> findById(Long id ){
         return articleRepository.findById(id);
     }
-    public Optional<ArticleEntity> findByTitle(ArticleDTO article ){
-        return Optional.ofNullable(articleRepository.findArticleByTitle(article.getTitle()));
+    public void findByTitle(ArticleDTO article ){
+        List<String> articles = articleRepository.findAll()
+                .stream()
+                .map(ArticleEntity::getTitle)
+                .toList();
+        Optional<String> articleExist = articles.stream()
+                .filter(element -> element.equalsIgnoreCase(article.getTitle()))
+                .findFirst();
+        if (articleExist.isPresent()) {
+            throw new WikiException(MessageErrorEnum.ARTICLE_EXISTS.getMessage());
+        }
     }
 
     public ArticleEntity createArticle(ArticleDTO article){
@@ -66,7 +75,7 @@ public class ArticleDAO {
                 .filter(element -> element.equalsIgnoreCase(article.getTitle()))
                 .findFirst();
         if (articleExist.isEmpty()){
-            throw new WikiException("Article title does not exist");
+            throw new WikiException(MessageErrorEnum.INVALID_TITLE.getMessage());
         }
         return articleRepository.findArticleByTitle(articleExist.get());
     }

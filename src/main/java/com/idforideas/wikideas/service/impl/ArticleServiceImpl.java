@@ -4,12 +4,9 @@ import com.idforideas.wikideas.dto.ArticleDTO;
 import com.idforideas.wikideas.dto.ArticleResponseDTO;
 import com.idforideas.wikideas.dto.ThemeDTO;
 import com.idforideas.wikideas.dto.validator.IValidatorArticle;
-import com.idforideas.wikideas.exception.MessageErrorEnum;
 import com.idforideas.wikideas.exception.WikiException;
 import com.idforideas.wikideas.model.ArticleEntity;
 import com.idforideas.wikideas.repository.ArticleDAO;
-import com.idforideas.wikideas.repository.ArticleRepository;
-import com.idforideas.wikideas.repository.ThemeRepository;
 import com.idforideas.wikideas.service.ArticleService;
 import com.idforideas.wikideas.utils.DTOValidator;
 import lombok.RequiredArgsConstructor;
@@ -29,16 +26,11 @@ import java.util.stream.IntStream;
 public class ArticleServiceImpl implements ArticleService {
 
     private final ArticleDAO articleDAO;
-    private final ArticleRepository articleRepository;
-    private final ThemeRepository themeRepository;
 
     @Override
     public ResponseEntity<ArticleResponseDTO> createArticle(ArticleDTO article) {
         DTOValidator.validate(article, IValidatorArticle.class);
-        Optional<ArticleEntity> articleExists = articleDAO.findByTitle(article);
-        if (articleExists.isPresent()) {
-            throw new WikiException(MessageErrorEnum.ARTICLE_EXISTS.getMessage());
-        }
+        articleDAO.findByTitle(article);
         ArticleEntity articleEntity = articleDAO.createArticle(article);
         ArticleResponseDTO response = responseDTO(articleEntity);
         return new ResponseEntity<>(response, HttpStatus.CREATED);

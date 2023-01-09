@@ -23,7 +23,7 @@ public class ThemeController {
     }
 
     @GetMapping("/{id}")
-    public ThemeDTO getThemeById(@PathVariable Long id){
+    public List<ThemeDTO> getThemeById(@PathVariable Long id){
         return themeService.getThemeById(id);
     }
 
