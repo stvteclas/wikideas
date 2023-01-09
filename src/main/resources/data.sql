@@ -1,4 +1,4 @@
-INSERT INTO themes (name, description)
+INSERT INTO themes (theme, description)
 VALUES
     ( 'ACTUALIDAD', 'ACTUALIDAD'),
     ('AGRICULTURA','AGRICULTURA'),
@@ -24,7 +24,7 @@ VALUES
     ('DEPORTES','DEPORTES'),
     ('FUTBOL','FUTBOL'),
     ('DERECHO','DERECHO'),
-    ('DISEÑO','DISEÑO'),
+    ('DISENIO','DISENIO'),
     ('ECONOMIA','ECONOMIA'),
     ('EMPRESA','EMPRESA'),
     ('EDUCACION','EDUCACION'),

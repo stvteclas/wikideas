@@ -1,8 +1,8 @@
 package com.idforideas.wikideas.controller;
 
 import com.idforideas.wikideas.dto.ArticleDTO;
-import com.idforideas.wikideas.dto.ArticleRequestDTO;
 import com.idforideas.wikideas.dto.ArticleResponseDTO;
+import com.idforideas.wikideas.dto.ThemeDTO;
 import com.idforideas.wikideas.model.ArticleEntity;
 import com.idforideas.wikideas.service.ArticleService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -32,18 +31,23 @@ public class ArticleController {
     }
 
     @GetMapping
-    public ArticleDTO getArticleByTitle(@RequestBody ArticleDTO article){
+    public ArticleResponseDTO getArticleByTitle(@RequestBody ArticleDTO article){
         return articleService.getArticleByTitle(article);
     }
 
     @GetMapping("/{id}")
-    public ArticleDTO getArticleById(@PathVariable Long id){
+    public ArticleResponseDTO getArticleById(@PathVariable Long id){
         return articleService.getArticleById(id);
     }
 
     @GetMapping("/articles")
     public List<ArticleDTO> showAllArticles (){
         return articleService.showAllArticles();
+    }
+
+    @GetMapping("/theme")
+    public List<ArticleDTO> showArticlesByTheme(@RequestBody ThemeDTO theme){
+        return articleService.showArticlesByTheme(theme);
     }
 
     @DeleteMapping("/delete/{id}")

@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"La Comunidad del Anillo\",\n    \"text\" : \"Una experiencia digna de ser vivida. El señor de los anillos es la novela de fantasía por excelencia. Realmente no hay palabras que le hagan justicia a todos los sentimientos que me ha generado este libro, pero aquí hay algunas cosas que puedo destacar. Los personajes son excelentes (a pesar de que a algunos no les agrade por el hecho de ser personajes buenos y malos), puedes identificarte con ellos, además de que todos tienen sus momentos de protagonismo. Los escenarios y la representación del mundo son excelentes, puedes imaginarte cada lugar incluso de la misma forma en que lo hacia el autor. En resumen, es un amplio y extenso mundo fantástico, que merece la pena ser recorrido, no solo una, sino en varias ocasiones, ya siempre podrás encontrar algo nuevo que te sorprenderá\",\n    \"theme\": \"CIENCIA_FICCION\"\n}",
+					"raw": "{\n    \"title\": \"La Historia Sin Fin\",\n    \"text\" : \"Una experiencia digna de ser vivida. El señor de los anillos es la novela de fantasía por excelencia. Realmente no hay palabras que le hagan justicia a todos los sentimientos que me ha generado este libro, pero aquí hay algunas cosas que puedo destacar. Los personajes son excelentes (a pesar de que a algunos no les agrade por el hecho de ser personajes buenos y malos), puedes identificarte con ellos, además de que todos tienen sus momentos de protagonismo. Los escenarios y la representación del mundo son excelentes, puedes imaginarte cada lugar incluso de la misma forma en que lo hacia el autor. En resumen, es un amplio y extenso mundo fantástico, que merece la pena ser recorrido, no solo una, sino en varias ocasiones, ya siempre podrás encontrar algo nuevo que te sorprenderá\",\n    \"theme\": \"HISTORIA\",\n    \"image\": \"image.jpg\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -42,7 +42,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"El Señor de los Anillos\",\n    \"text\": \"Tres Anillos para los Reyes Elfos bajo el cielo. Siete para los Señores Enanos en casas de piedra. Nueve para los Hombres Mortales condenados a morir. Uno para el Señor Oscuro, sobre el trono oscuro en la Tierra de Mordor donde se extienden las Sombras. Un Anillo para gobernarlos a todos. Un Anillo para encontrarlos, un Anillo para atraerlos a todos y atarlos en las tinieblas en la Tierra de Mordor donde se extienden las Sombras».\",\n    \"theme\":\"HISTORIA\"\n}",
+					"raw": "{\n    \"title\": \"El Señor de los Anillos\",\n    \"text\": \"Tres Anillos para los Reyes Elfos bajo el cielo. Siete para los Señores Enanos en casas de piedra. Nueve para los Hombres Mortales condenados a morir. Uno para el Señor Oscuro, sobre el trono oscuro en la Tierra de Mordor donde se extienden las Sombras. Un Anillo para gobernarlos a todos. Un Anillo para encontrarlos, un Anillo para atraerlos a todos y atarlos en las tinieblas en la Tierra de Mordor donde se extienden las Sombras».\",\n    \"theme\":\"HISTORIA\",\n    \"image\":\"image2.jpg\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -182,7 +182,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/themes/43",
+					"raw": "http://localhost:8080/themes/35",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -190,7 +190,39 @@
 					"port": "8080",
 					"path": [
 						"themes",
-						"43"
+						"35"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getArticleByTheme",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"theme\": \"HISTORIA\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/article/theme",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"article",
+						"theme"
 					]
 				}
 			},

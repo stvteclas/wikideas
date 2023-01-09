@@ -1,5 +1,9 @@
 package com.idforideas.wikideas.model;
 
+import com.idforideas.wikideas.dto.validator.IValidatorArticle;
+import com.idforideas.wikideas.dto.validator.IValidatorTheme;
+import com.idforideas.wikideas.utils.DTOValidator;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -30,7 +34,7 @@ public enum ThemeEnum {
     DEPORTES("DEPORTES", 22L),
     FUTBOL("FUTBOL", 23L),
     DERECHO("DERECHO", 24L),
-    DISEÑO("DISEÑO", 25L),
+    DISENIO("DISENIO", 25L),
     ECONOMIA("ECONOMIA", 26L),
     EMPRESA("EMPRESA", 27L),
     EDUCACION("EDUCACION", 28L),
@@ -56,7 +60,7 @@ public enum ThemeEnum {
     SERIES("SERIES", 48L),
     PELICULAS("PELICULAS", 49L),
     PROGRAMAS_TV("PROGRAMAS TV", 50L);
-    private String name;
+    private String theme;
     private Long id;
 
 }

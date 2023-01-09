@@ -2,13 +2,12 @@ package com.idforideas.wikideas.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Setter
 @Getter
@@ -32,6 +31,10 @@ public class ArticleEntity {
     @Column(name = "text", length = 429496729 )
     @NotNull
     private String text;
+
+    @Column(name = "image")
+    @NotNull
+    private String image;
 
     @Column(name = "creationDate")
     @CreationTimestamp

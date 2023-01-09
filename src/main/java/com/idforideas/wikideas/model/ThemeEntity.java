@@ -1,6 +1,5 @@
 package com.idforideas.wikideas.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -23,10 +22,10 @@ public class ThemeEntity {
     @Column(name = "idTheme")
     private Long idTheme;
 
-    @Column(name = "name")
+    @Column(name = "theme")
     @NotNull
     @Enumerated (value = EnumType.STRING)
-    private ThemeEnum name;
+    private ThemeEnum theme;
 
     @Column(name = "description")
     @NotNull

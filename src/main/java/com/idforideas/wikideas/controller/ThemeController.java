@@ -1,6 +1,5 @@
 package com.idforideas.wikideas.controller;
 
-import com.idforideas.wikideas.dto.ArticleDTO;
 import com.idforideas.wikideas.dto.ThemeDTO;
 import com.idforideas.wikideas.service.ThemeService;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +23,8 @@ public class ThemeController {
     }
 
     @GetMapping("/{id}")
-    public ThemeDTO getArticleById(@PathVariable Long id){
-        return themeService.getArticleById(id);
+    public ThemeDTO getThemeById(@PathVariable Long id){
+        return themeService.getThemeById(id);
     }
 
 }
