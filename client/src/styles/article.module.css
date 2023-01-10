@@ -19,12 +19,13 @@
     justify-content: center;
     justify-items: center;
     align-items: center;
-    height: 70vh;
+    height: 55%;
+
 
 }
 .image{
-    width: 80vw;
-    height: 70vh;
+    width: 100%;
+    height: 100%;
 }
 .image img{
     width: 100%;
@@ -49,6 +50,7 @@
      
         align-items: center;
         border-radius: 10px;
+        padding-bottom: 10px;
     }
     .title{
         font-family: "Inter";
@@ -68,6 +70,7 @@
         margin: 0px 40px;
         margin-bottom: 40px;
         height: 50%;
+     
     }
     .welcome::-webkit-scrollbar-track {
         border: transparent;

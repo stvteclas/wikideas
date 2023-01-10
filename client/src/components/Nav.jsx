@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import oec from "../images/oec-white.png"
 import"../styles/nav.css"
 
 const Nav = () => {
+  const navigate= useNavigate()
 
     return (
         <>
@@ -15,17 +17,17 @@ const Nav = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link "  href="/">HOME</a>
+                <Link className="nav-link" to="/">HOME</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link"  href="/about">ABOUT</a>
+                <Link className="nav-link" to="/about">ABOUT</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/articles">ARTICLES</a>
+                <Link className="nav-link" to="/articles">ARTICLES</Link>
               </li>
               <li className="nav-item">
                 
-               <button className='collaborate'>CREATE ARTICLE </button>
+               <button className='collaborate' onClick={()=>navigate("/create")}>CREATE ARTICLE </button>
               </li>
               
             </ul>
