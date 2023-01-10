@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,20 +24,17 @@ public class ThemeServiceImpl implements ThemeService {
         List<ThemeEntity> themes = themeRepository.findAll();
         return themes.stream()
                 .map(ThemeDTO::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
-    public ThemeDTO getThemeById(Long id) {
+    public List<ThemeDTO> getThemeById(Long id) {
         Optional<ThemeEntity> themeEntity = themeRepository.findById(id);
         if (!themeEntity.isPresent()){
             throw new WikiException("id theme does not  exist");
         }
-        ThemeDTO themeDTO = ThemeDTO.builder()
-                .idTheme(themeEntity.get().getIdTheme())
-                .theme(themeEntity.get().getTheme())
-                .description(themeEntity.get().getDescription())
-                .build();
-        return themeDTO;
+        return themeEntity.stream()
+                .map(ThemeDTO::new)
+                .toList();
     }
 }
