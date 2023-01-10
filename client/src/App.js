@@ -1,3 +1,4 @@
+import React,{ useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Nav from './components/Nav';
@@ -9,16 +10,21 @@ import Home from './pages/Home';
 
 
 function App() {
+
+
+
+
   return (
     <>
-     <Nav/>
+    <Nav/>
     <Routes>
       
       <Route path='/' element={<Home/>}/>
+      <Route path='/create' element={<Create/>}/>
       <Route path='/articles' element={<Articles/>}/>
       <Route path='/about' element={<About/>}/>
-      <Route path='/article/:id' element={<Article/>}/>
-      <Route path='/create' element={<Create/>}/>
+      <Route path='/articles/article/:id' element={<Article/>}/>
+      
     </Routes>
     </>
   );
