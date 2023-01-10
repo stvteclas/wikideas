@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { connect } from 'react-redux';
 import { IoIosArrowBack } from 'react-icons/io';
 import s from "../styles/create.module.css"
 import { BsImageFill, BsEyeFill } from "react-icons/bs";
@@ -6,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import create from "../images/create.jpg"
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import { useDispatch, useSelector } from "react-redux";
+import { createArticle, getThemes } from "../redux/actions";
 
 // const allCategories = ["easy care", "tabletop", "pet friendly"];
 // const allSize = ["mini", "small", "medium", "large"];
@@ -13,13 +16,24 @@ import TextField from '@mui/material/TextField';
 const Create = () => {
 
     const navigate = useNavigate();
+    const dispatch= useDispatch()
 
     const [errorTitle, setErrorTitle] = useState(false);
+    const [errorImage, setErrorImage] = useState(false);
     const[helperTitle, setHelperTitle]= useState("Please enter title")
+    const[helperImage, setHelperImage]= useState("Please enter image url")
     const[title,setTitle]=useState("")
+    const[image,setImage]=useState("")
     const [errorContent, setErrorContent] = useState(false);
     const[helperContent, setHelperContent]= useState("Please write a content")
     const[content,setContent]=useState("")
+    const[categories, setCategories]=useState("all")
+    const themes = useSelector((state)=>state.articlesReducers.themes)
+
+    useEffect(()=>{
+      dispatch(getThemes())
+     },[dispatch])
+ console.log(title,content, image,categories)
 
     const handleTitle = (e) => {
         e.preventDefault()
@@ -33,6 +47,19 @@ const Create = () => {
         } else {
           setErrorTitle(false);
           setHelperTitle("");
+        }
+     
+
+      };
+      const handleImage = (e) => {
+        e.preventDefault()
+        setImage(e.target.value)
+        if (!image.match(/^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)\??.*$/gim)) {
+          setErrorImage(true);
+          setErrorImage("Enter a valid image url");
+        } else{
+          setErrorImage(false);
+          setHelperImage("");
         }
      
 
@@ -57,6 +84,18 @@ const Create = () => {
         navigate('/dashboard');
         window.scrollTo(0, {behavior: 'smooth'})
       };
+      function handleSelect(e) {
+       e.preventDefault()
+       setCategories(e.target.value)
+
+      }
+      function handleSubmit(e) {
+        e.preventDefault();
+        let obj={title, text:content,image,theme:categories}
+        dispatch(createArticle(obj));
+       
+       
+      }
     return (
         <div className={s.container}>
             <div className={s.button_container}>
@@ -69,12 +108,12 @@ const Create = () => {
 
         </div>
         <div className={s.right} >
-            <form action="" className={s.form}  >
+            <form action="" className={s.form} onSubmit={(e) => handleSubmit(e)}  >
                 <h4>Create article</h4>
                 <Box
                  component="form"
                  sx={{
-                   '& .MuiTextField-root': { m: 2, width: '100%' },
+                   '& .MuiTextField-root': { m: 1, width: '100%' },
                  }}
                  noValidate
                  autoComplete="off"
@@ -92,13 +131,36 @@ const Create = () => {
           id="outlined-multiline-static"
           label="Content"
           multiline
-          rows={4}
+          rows={2}
           placeholder="Content"
           helperText={helperContent}
           onChange={(e)=>handleContent(e)}
         />
+        <TextField
+        error={errorImage}
+          id="filled-textarea"
+          label="Image URL"
+          placeholder="Image URL"
+          helperText={helperImage}
+          onChange={(e)=>handleImage(e)}
+        />
+         <select
+           
+           name=""
+           id=""
+           className={s.select}
+           onChange={e=>handleSelect(e)}
+         >
+          <option value={categories}>CATEGORIES</option>
+             {themes.map((t) => (
+               <option key={t?.idTheme} value={t?.theme}>
+                 {t?.theme}
+               </option>
+             ))}
+         </select>
 
                 </Box>
+                <button className={s.create_btn} type="submit" >Create</button>
                
             </form>
 
@@ -112,4 +174,4 @@ const Create = () => {
     );
 };
 
-export default Create;
+export default connect()(Create);

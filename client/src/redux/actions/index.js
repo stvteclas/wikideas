@@ -4,6 +4,7 @@ export const GET_ARTICLES = "GET_ARTICLES";
 export const GET_THEMES = "GET_THEMES";
 export const GET_ARTICLE_BY_ID = "GET_ARTICLE_BY_ID";
 export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
+export const CREATE_ARTICLE = "CREATE_ARTICLE";
 
 
 
@@ -55,5 +56,18 @@ export function getThemes() {
         });
       })
       .catch((err) => console.log(err));
+  };
+}
+
+//----------Create Article------------
+export function createArticle(obj) {
+  return dispatch => {
+    // Hace la petición POST y envía los datos en el cuerpo de la solicitud
+    return axios.post('http://localhost:8080/article/create', obj)
+      .then(res => {
+        // Dispatch de la acción de actualización con los datos devueltos de la API
+        dispatch( {type: CREATE_ARTICLE,
+          payload: res.data});
+      });
   };
 }
