@@ -2,7 +2,6 @@ package com.idforideas.wikideas.controller;
 
 import com.idforideas.wikideas.dto.ArticleDTO;
 import com.idforideas.wikideas.dto.ArticleResponseDTO;
-import com.idforideas.wikideas.dto.ThemeDTO;
 import com.idforideas.wikideas.model.ArticleEntity;
 import com.idforideas.wikideas.service.ArticleService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +15,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/article")
 public class ArticleController {
     private final ArticleService articleService;
@@ -30,7 +30,7 @@ public class ArticleController {
         return articleService.updateArticle(id, article);
     }
 
-    @GetMapping
+    @PostMapping
     public ResponseEntity<ArticleResponseDTO> getArticleByTitle(@RequestBody ArticleDTO article){
         return articleService.getArticleByTitle(article);
     }
@@ -45,8 +45,8 @@ public class ArticleController {
         return articleService.showAllArticles();
     }
 
-    @GetMapping("/theme")
-    public List<ArticleDTO> showArticlesByTheme(@RequestBody ThemeDTO theme){
+    @GetMapping("/theme/{theme}")
+    public List<ArticleDTO> showArticlesByTheme(@PathVariable String theme){
         return articleService.showArticlesByTheme(theme);
     }
 

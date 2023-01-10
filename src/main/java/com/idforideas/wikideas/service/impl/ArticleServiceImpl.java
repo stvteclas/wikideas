@@ -2,7 +2,6 @@ package com.idforideas.wikideas.service.impl;
 
 import com.idforideas.wikideas.dto.ArticleDTO;
 import com.idforideas.wikideas.dto.ArticleResponseDTO;
-import com.idforideas.wikideas.dto.ThemeDTO;
 import com.idforideas.wikideas.dto.validator.IValidatorArticle;
 import com.idforideas.wikideas.exception.WikiException;
 import com.idforideas.wikideas.model.ArticleEntity;
@@ -41,7 +40,7 @@ public class ArticleServiceImpl implements ArticleService {
     public ResponseEntity<Object> updateArticle(Long id, ArticleDTO article) {
         DTOValidator.validate(article, IValidatorArticle.class);
         Optional<ArticleEntity> opArticle = articleDAO.findById(id);
-        if (!opArticle.isPresent()){
+        if (!opArticle.isEmpty()){
             throw new WikiException("article does not  exist");
         }
         ArticleEntity articleEntity = articleDAO.updateArticle(id, article);
@@ -98,7 +97,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public ResponseEntity<ArticleResponseDTO> getArticleById(Long id) {
         Optional<ArticleEntity> opArticle = articleDAO.findById(id);
-        if (!opArticle.isPresent()){
+        if (!opArticle.isEmpty()){
             throw new WikiException("article does not  exist");
         }
         ArticleResponseDTO response = responseDTO(opArticle.get());
@@ -106,7 +105,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<ArticleDTO> showArticlesByTheme(ThemeDTO theme) {
+    public List<ArticleDTO> showArticlesByTheme(String theme) {
         return articleDAO.showArticlesByTheme(theme);
     }
     private ArticleResponseDTO responseDTO(ArticleEntity articleEntity){
