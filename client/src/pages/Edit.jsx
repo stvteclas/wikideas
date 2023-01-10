@@ -35,10 +35,10 @@ const Edit = () => {
     const handleTitle = (e) => {
         e.preventDefault()
         setTitle(e.target.value)
-        if (title.length > 45) {
+        if (title.length > 20) {
           setErrorTitle(true);
-          setHelperTitle("title cannot be longer than 45 characters");
-        } else if (title.length < 10) {
+          setHelperTitle("title cannot be longer than 20 characters");
+        } else if (title.length < 3) {
           setErrorTitle(true);
           setHelperTitle("title cannot be lower than 10 characters");
         } else {
