@@ -5,7 +5,8 @@ export const GET_THEMES = "GET_THEMES";
 export const GET_ARTICLE_BY_ID = "GET_ARTICLE_BY_ID";
 export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const CREATE_ARTICLE = "CREATE_ARTICLE";
-
+export const DELETE_ARTICLE = "DELETE_ARTICLE";
+export const UPDATE_ARTICLE = "UPDATE_ARTICLE";
 
 
 //Get all Articles------------
@@ -69,5 +70,36 @@ export function createArticle(obj) {
         dispatch( {type: CREATE_ARTICLE,
           payload: res.data});
       });
+  };
+}
+
+//----------Delete Article------------
+export function deleteArticle(id) {
+  return async function (dispatch) {
+    return axios
+      .delete( `http://localhost:8080/article/delete/${id}`)
+      .then((res) => {
+        dispatch({
+          type: DELETE_ARTICLE,
+          payload: res.data,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+}
+
+
+//----------Edit Article------------
+export function editArticle(body,id) {
+  return async function (dispatch) {
+    return axios
+      .patch( `http://localhost:8080/article/update/${id}`,body)
+      .then((res) => {
+        dispatch({
+          type: UPDATE_ARTICLE,
+          payload: res.data,
+        });
+      })
+      .catch((err) => console.log(err));
   };
 }

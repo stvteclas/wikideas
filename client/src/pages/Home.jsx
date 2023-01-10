@@ -8,13 +8,8 @@ import { getArticles, getThemes } from '../redux/actions/index.js';
 
 
 const Home = () => {
-  const dispatch = useDispatch()
 
-  useEffect(()=>{
-   dispatch(getArticles())
-   dispatch(getThemes())
 
-  },[dispatch])
 
 
 

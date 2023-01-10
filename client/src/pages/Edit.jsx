@@ -3,19 +3,16 @@ import { connect } from 'react-redux';
 import { IoIosArrowBack } from 'react-icons/io';
 import s from "../styles/create.module.css"
 import { BsImageFill, BsEyeFill } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import create from "../images/create.jpg"
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from "react-redux";
-import { createArticle, getThemes } from "../redux/actions";
+import { createArticle, editArticle, getThemes } from "../redux/actions";
 import Swal from 'sweetalert2'
 
-// const allCategories = ["easy care", "tabletop", "pet friendly"];
-// const allSize = ["mini", "small", "medium", "large"];
-
-const Create = () => {
-
+const Edit = () => {
+    
     const navigate = useNavigate();
     const dispatch= useDispatch()
 
@@ -30,6 +27,7 @@ const Create = () => {
     const[content,setContent]=useState("")
     const[categories, setCategories]=useState("all")
     const themes = useSelector((state)=>state.articlesReducers.themes)
+    const { id } = useParams();
 
     
   
@@ -91,26 +89,21 @@ const Create = () => {
       function handleSubmit(e) {
         e.preventDefault();
         Swal.fire({
-          title: 'Are you sure you want to create this article?',
+          title: 'Are you sure you want to save the changes?',
           icon:"question",
-          showDenyButton: true,
           showCancelButton: true,
           confirmButtonText: 'Save',
-          denyButtonText: `Cancel`,
         }).then((result) => {
   
           if (result.isConfirmed) {
           
             let obj={title, text:content,image,theme:categories}
-            dispatch(createArticle(obj));
+            dispatch(editArticle(obj,id));
             Swal.fire('Saved!', '', 'success')
             navigate("/articles")
             window.location.reload(false);
             
-          } else if (result.isDenied) {
-            Swal.fire('Changes are not saved', '', 'info')
-    
-          }
+          } 
         })
         
      
@@ -120,84 +113,84 @@ const Create = () => {
       }
     return (
         <div className={s.container}>
-            <div className={s.button_container}>
-        <button onClick={handleBack} className={s.back}>
-          <IoIosArrowBack />
-        </button>
-      </div>
-      <div className={s.wraper}>
-        <div className={s.left} style={{backgroundImage: `url(${create})`}}>
+        <div className={s.button_container}>
+    <button onClick={handleBack} className={s.back}>
+      <IoIosArrowBack />
+    </button>
+  </div>
+  <div className={s.wraper}>
+    <div className={s.left} style={{backgroundImage: `url(${create})`}}>
 
-        </div>
-        <div className={s.right} >
-            <form action="" className={s.form} onSubmit={(e) => handleSubmit(e)}  >
-                <h4>Create article</h4>
-                <Box
-                 component="form"
-                 sx={{
-                   '& .MuiTextField-root': { m: 1, width: '100%' },
-                 }}
-                 noValidate
-                 autoComplete="off"
-                >
-                       <TextField
-                       value={title}
-        error={errorTitle}
-          id="filled-textarea"
-          label="Title"
-          placeholder="Title"
-          helperText={helperTitle}
-          onChange={(e)=>handleTitle(e)}
-        />
-            <TextField
-            value={content}
-             error={errorContent}
-          id="outlined-multiline-static"
-          label="Content"
-          multiline
-          rows={2}
-          placeholder="Content"
-          helperText={helperContent}
-          onChange={(e)=>handleContent(e)}
-        />
+    </div>
+    <div className={s.right} >
+        <form action="" className={s.form} onSubmit={(e) => handleSubmit(e)}  >
+            <h4>Edit article</h4>
+            <Box
+             component="form"
+             sx={{
+               '& .MuiTextField-root': { m: 1, width: '100%' },
+             }}
+             noValidate
+             autoComplete="off"
+            >
+                   <TextField
+                   value={title}
+    error={errorTitle}
+      id="filled-textarea"
+      label="Title"
+      placeholder="Title"
+      helperText={helperTitle}
+      onChange={(e)=>handleTitle(e)}
+    />
         <TextField
-        value={image}
-        error={errorImage}
-          id="filled-textarea"
-          label="Image URL"
-          placeholder="Image URL"
-          helperText={helperImage}
-          onChange={(e)=>handleImage(e)}
-        />
-         <select
-      
+        value={content}
+         error={errorContent}
+      id="outlined-multiline-static"
+      label="Content"
+      multiline
+      rows={2}
+      placeholder="Content"
+      helperText={helperContent}
+      onChange={(e)=>handleContent(e)}
+    />
+    <TextField
+    value={image}
+    error={errorImage}
+      id="filled-textarea"
+      label="Image URL"
+      placeholder="Image URL"
+      helperText={helperImage}
+      onChange={(e)=>handleImage(e)}
+    />
+     <select
+  
+       
+       name=""
+       id=""
+       className={s.select}
+       onChange={e=>handleSelect(e)}
+     >
+      <option value={categories}>CATEGORIES</option>
+         {themes&&themes.map((t) => (
+           <option key={t?.idTheme} value={t?.theme}>
+             {t?.theme}
+           </option>
+         ))}
+     </select>
+
+            </Box>
+            <button className={s.create_btn}  type="submit" >Edit</button>
            
-           name=""
-           id=""
-           className={s.select}
-           onChange={e=>handleSelect(e)}
-         >
-          <option value={categories}>CATEGORIES</option>
-             {themes&&themes.map((t) => (
-               <option key={t?.idTheme} value={t?.theme}>
-                 {t?.theme}
-               </option>
-             ))}
-         </select>
+        </form>
 
-                </Box>
-                <button className={s.create_btn} type="submit" >Create</button>
-               
-            </form>
-
-        </div>
+    </div>
 
 
-      </div>
+  </div>
 
-   
-        </div>
+
+    </div>
     );
 };
 
-export default connect()(Create);
+export default connect()(Edit);

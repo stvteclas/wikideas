@@ -10,6 +10,7 @@ const Articles = () => {
   const navigate= useNavigate()
   const dispatch= useDispatch()
 
+
   const articles = useSelector((state)=>state.articlesReducers.articles)
   const themes = useSelector((state)=>state.articlesReducers.themes)
   function filterCategories(e) {
@@ -34,7 +35,7 @@ const Articles = () => {
             onChange={e=>filterCategories(e)}
           >
            <option value="all">CATEGORIES</option>
-              {themes.map((t) => (
+              {themes&&themes.map((t) => (
                 <option key={t?.idTheme} value={t?.theme}>
                   {t?.theme}
                 </option>
@@ -46,13 +47,13 @@ const Articles = () => {
                 
               
               <div className={s.favorite_list}>
-              {articles?.map((article) => {
+              {articles &&articles?.map((article) => {
                 return (
                   <div className={s.card} key={article?.id}>
                     <img src={article?.image} alt="" />
                     <div className={s.specs}>
-                      <h5>{article?.name}</h5>
-                      <p>{article&&article?.text?.slice(0,100)}...</p>
+                      <h5>{article?.title}</h5>
+                      <p >{article&&article?.text?.slice(0,50)}...</p>
                       <div className={s.more} onClick={()=>navigate(`article/${article?.id}`)}>
                         <span>see more</span>
                         <button className={s.more_btn}><HiChevronDoubleRight/></button>
