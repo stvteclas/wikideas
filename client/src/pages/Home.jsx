@@ -4,7 +4,7 @@ import castle from "../images/castle.jpg"
 import oek from "../images/oec.png"
 import SearchBar from '../components/SearchBar';
 import { useDispatch, useSelector } from 'react-redux';
-import { getArticles } from '../redux/actions';
+import { getArticles, getThemes } from '../redux/actions/index.js';
 
 
 const Home = () => {
@@ -12,10 +12,11 @@ const Home = () => {
 
   useEffect(()=>{
    dispatch(getArticles())
+   dispatch(getThemes())
 
-  },[])
-  const articles = useSelector((state)=>state.articlesReducers.articles)
-  console.log(articles)
+  },[dispatch])
+
+
 
     return (
       <div
