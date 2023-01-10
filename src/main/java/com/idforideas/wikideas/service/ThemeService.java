@@ -7,5 +7,5 @@ import java.util.List;
 public interface ThemeService {
     List<ThemeDTO> showAllThemes();
 
-    ThemeDTO getThemeById(Long id);
+    List<ThemeDTO> getThemeById(Long id);
 }

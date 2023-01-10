@@ -31,12 +31,12 @@ public class ArticleController {
     }
 
     @GetMapping
-    public ArticleResponseDTO getArticleByTitle(@RequestBody ArticleDTO article){
+    public ResponseEntity<ArticleResponseDTO> getArticleByTitle(@RequestBody ArticleDTO article){
         return articleService.getArticleByTitle(article);
     }
 
     @GetMapping("/{id}")
-    public ArticleResponseDTO getArticleById(@PathVariable Long id){
+    public ResponseEntity<ArticleResponseDTO> getArticleById(@PathVariable Long id){
         return articleService.getArticleById(id);
     }
 
