@@ -18,12 +18,13 @@
 .wraper {
     width: 60vw;
     min-width: 350px;
+    height: auto;
     display: flex;
     flex-direction: row;
     justify-content: center;
     justify-items: center;
     align-items: center;
-    height: 70vh;
+    height: 72vh;
     background-color: #fff;
     padding: 10px;
     gap: 20px;
@@ -45,6 +46,7 @@
 .right img {
     width: 80px;
     border-radius: 12px;
+    
 }
 
 .left {
@@ -172,15 +174,18 @@
 }
 
 .create_btn {
-    background-color: #ead2b8;
+    background-color: #e4be92;
     color: rgb(94, 94, 94);
-    width: 100%;
+    width:50%;
     padding: 5px 10px;
     border-radius: 2px;
     caret-color: transparent;
-    font-size: small;
+    margin-top: 20px;
+
     font-weight: bold;
     cursor: pointer;
+    border-radius: 12px;
+    border: none;
 }
 
 .create_btn:hover {
@@ -252,6 +257,73 @@
     align-items: center;
     cursor: pointer;
 }
+
+.temperaments label {
+    font-size: 12px;
+    font-family: "Open Sans", sans-serif;
+    width: 100%;
+    margin-right: 10px;
+    color: rgb(194, 191, 191);
+}
+
+.temperaments select {
+    min-width: 10em;
+    padding: 0.5em 1em;
+    background: transparent;
+    border: rgb(212, 210, 210) solid;
+    border-radius: 12px 0px 0px 12px;
+    color: inherit;
+    font: inherit;
+    display: block;
+    margin-top: 10px;
+    overflow: auto
+}
+
+.option {
+    color: rgb(194, 191, 191);
+    font-family: "Outfit", sans-serif;
+    font-weight: normal;
+    display: block;
+    white-space: nowrap;
+    min-height: 1.2em;
+    padding: 0px 2px 1px;
+}
+
+.temperament {
+    background-color: transparent;
+    width: 100px;
+    position: relative;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(194, 191, 191);
+    font-family: "Outfit", sans-serif;
+}
+
+.temperament button {
+    background-color: transparent;
+    border: none;
+}
+
+.temperament button i {
+    color: rgba(255, 10, 10, 0.705);
+    font-size: 12px;
+}
+
+.temperament button i:hover {
+    cursor: pointer;
+}
+
+.temperaments_container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+}
+
+
 
 @media (max-width: 768px) {
     .wraper {

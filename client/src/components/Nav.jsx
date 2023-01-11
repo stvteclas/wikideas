@@ -27,7 +27,7 @@ const Nav = () => {
               </li>
               <li className="nav-item">
                 
-               <button className='collaborate' onClick={()=>navigate("/create")}>CREATE ARTICLE </button>
+               <button type='button' className='collaborate' onClick={()=>navigate("/create")}>CREATE ARTICLE </button>
               </li>
               
             </ul>

@@ -6,7 +6,8 @@ import {MdDeleteForever}from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
 import plans from "../images/marte.webp";
 import { useDispatch, useSelector } from 'react-redux';
-import { getArticleById } from '../redux/actions';
+import { deleteArticle, getArticleById } from '../redux/actions';
+import Swal from 'sweetalert2'
 const Article = () => {
     const navigate = useNavigate();
     const { id } = useParams();
@@ -16,8 +17,36 @@ const Article = () => {
      dispatch(getArticleById(id))
   
     },[dispatch])
+    function handleDelete(e) {
+      e.preventDefault();
+      Swal.fire({
+        title: 'Are you sure you want to delete this article?',
+        icon:"question",
+        showConfirmButton:false,
+        showDenyButton: true,
+        showCancelButton: true,
+        denyButtonText: `Delete`,
+      }).then((result) => {
+
+        if (result.isDenied) {
+        
+              
+      dispatch(deleteArticle(id))
+          Swal.fire('Deleted!', '', 'success')
+          navigate("/articles")
+          window.location.reload(false);
+          
+        } 
+      })
+      
+   
+ 
+
+ 
+    }
+  
     const article = useSelector((state)=>state.articlesReducers.article)
-console.log(article)
+
 
     return (
         <div className={s.container}>
@@ -36,10 +65,10 @@ console.log(article)
          <p  className={s.welcome}>{article?.text} </p>
          <span>Publish date: {article.creationDate? article?.creationDate.slice(0,10):null}</span>
          <div className={s.btn_container}>
-            <button className={s.btn_edit}>
+            <button className={s.btn_edit} onClick={()=>navigate(`/edit/${id}`)}>
                 <FiEdit/>
             </button>
-            <button className={s.btn_delete}>
+            <button className={s.btn_delete} onClick={(e)=>handleDelete(e)} >
                 <MdDeleteForever/>
             </button>
 
