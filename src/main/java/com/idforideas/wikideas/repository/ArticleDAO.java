@@ -1,7 +1,6 @@
 package com.idforideas.wikideas.repository;
 
 import com.idforideas.wikideas.dto.ArticleDTO;
-import com.idforideas.wikideas.dto.ThemeDTO;
 import com.idforideas.wikideas.exception.MessageErrorEnum;
 import com.idforideas.wikideas.exception.WikiException;
 import com.idforideas.wikideas.model.ArticleEntity;
@@ -40,7 +39,7 @@ public class ArticleDAO {
 
     public ArticleEntity createArticle(ArticleDTO article){
         Optional<ThemeEnum> theme1 = Optional.ofNullable(article.getTheme());
-        if (!theme1.isPresent()){
+        if (!theme1.isEmpty()){
             throw new WikiException(MessageErrorEnum.INVALID_THEME.getMessage());
         }
         ThemeEntity themeEntity = themeRepository.findByTheme(article.getTheme());
@@ -95,14 +94,16 @@ public class ArticleDAO {
         return articleRepository.findAll(pageRequest);
     }
 
-    public List<ArticleDTO> showArticlesByTheme(ThemeDTO theme) {
-        Optional<ThemeEntity> themeEntity = Optional.ofNullable(themeRepository.findByTheme(theme.getTheme()));
+    public List<ArticleDTO> showArticlesByTheme(String theme) {
+        ThemeEnum themeEnum = ThemeEnum.valueOf(theme);
+        Optional<ThemeEntity> themeEntity = Optional.ofNullable(themeRepository.findByTheme(themeEnum));
 
-       if (!themeEntity.isPresent()){
+       if (!themeEntity.isEmpty()){
             throw new WikiException(MessageErrorEnum.INVALID_THEME.getMessage());
         }
 
         List<ArticleEntity> articles = articleRepository.findByTheme(themeEntity.get());
+
         return articles.stream()
                 .map(ArticleDTO::new)
                 .toList();
