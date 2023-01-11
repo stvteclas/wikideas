@@ -39,7 +39,7 @@ public class ArticleDAO {
 
     public ArticleEntity createArticle(ArticleDTO article){
         Optional<ThemeEnum> theme1 = Optional.ofNullable(article.getTheme());
-        if (!theme1.isEmpty()){
+        if (!theme1.isPresent()){
             throw new WikiException(MessageErrorEnum.INVALID_THEME.getMessage());
         }
         ThemeEntity themeEntity = themeRepository.findByTheme(article.getTheme());
@@ -73,7 +73,7 @@ public class ArticleDAO {
         Optional<String> articleExist = articles.stream()
                 .filter(element -> element.equalsIgnoreCase(article.getTitle()))
                 .findFirst();
-        if (articleExist.isEmpty()){
+        if (!articleExist.isPresent()){
             throw new WikiException(MessageErrorEnum.INVALID_TITLE.getMessage());
         }
         return articleRepository.findArticleByTitle(articleExist.get());
@@ -98,7 +98,7 @@ public class ArticleDAO {
         ThemeEnum themeEnum = ThemeEnum.valueOf(theme);
         Optional<ThemeEntity> themeEntity = Optional.ofNullable(themeRepository.findByTheme(themeEnum));
 
-       if (!themeEntity.isEmpty()){
+       if (!themeEntity.isPresent()){
             throw new WikiException(MessageErrorEnum.INVALID_THEME.getMessage());
         }
 

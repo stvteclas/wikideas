@@ -97,7 +97,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public ResponseEntity<ArticleResponseDTO> getArticleById(Long id) {
         Optional<ArticleEntity> opArticle = articleDAO.findById(id);
-        if (!opArticle.isEmpty()){
+        if (!opArticle.isPresent()){
             throw new WikiException("article does not  exist");
         }
         ArticleResponseDTO response = responseDTO(opArticle.get());
