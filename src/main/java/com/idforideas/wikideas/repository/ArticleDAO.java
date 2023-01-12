@@ -54,10 +54,10 @@ public class ArticleDAO {
 
     public ArticleEntity updateArticle(Long id, ArticleDTO article){
         Optional<ArticleEntity> articleUpdate = articleRepository.findById(id);
-        if (articleUpdate.isEmpty()){
+        if (!articleUpdate.isPresent()){
             throw new WikiException("Article does not exist");
         }
-       ThemeEntity themeEntity = themeRepository.findByTheme(article.getTheme());
+        ThemeEntity themeEntity = themeRepository.findByTheme(article.getTheme());
         articleUpdate.get().setText(article.getText());
         articleUpdate.get().setTitle(article.getTitle());
         articleUpdate.get().setImage(article.getImage());
@@ -76,7 +76,8 @@ public class ArticleDAO {
         if (!articleExist.isPresent()){
             throw new WikiException(MessageErrorEnum.INVALID_TITLE.getMessage());
         }
-        return articleRepository.findArticleByTitle(articleExist.get());
+        ArticleEntity articleEntity = articleRepository.findArticleByTitle(articleExist.get());
+        return articleEntity;
     }
 
     public List<ArticleDTO> getAll() {
@@ -98,7 +99,7 @@ public class ArticleDAO {
         ThemeEnum themeEnum = ThemeEnum.valueOf(theme);
         Optional<ThemeEntity> themeEntity = Optional.ofNullable(themeRepository.findByTheme(themeEnum));
 
-       if (!themeEntity.isPresent()){
+        if (!themeEntity.isPresent()){
             throw new WikiException(MessageErrorEnum.INVALID_THEME.getMessage());
         }
 
