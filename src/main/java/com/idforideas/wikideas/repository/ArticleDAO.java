@@ -76,8 +76,7 @@ public class ArticleDAO {
         if (!articleExist.isPresent()){
             throw new WikiException(MessageErrorEnum.INVALID_TITLE.getMessage());
         }
-        ArticleEntity articleEntity = articleRepository.findArticleByTitle(articleExist.get());
-        return articleEntity;
+       return articleRepository.findArticleByTitle(articleExist.get());
     }
 
     public List<ArticleDTO> getAll() {
