@@ -2,7 +2,7 @@ import React, {  useState } from "react";
 import { IoIosArrowBack } from 'react-icons/io';
 import s from "../styles/create.module.css"
 import { useNavigate } from "react-router-dom";
-import create from "../images/create.jpg"
+import create from "../images/create.webp"
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from "react-redux";

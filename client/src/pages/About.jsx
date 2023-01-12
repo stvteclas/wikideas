@@ -1,8 +1,6 @@
 import React from 'react';
 import s from "../styles/about.module.css"
-
-
-import oek from "../images/oec-white.png"
+import oek from "../images/oec-white.webp"
 import{AiFillGithub}from "react-icons/ai"
 const About = () => {
     return (

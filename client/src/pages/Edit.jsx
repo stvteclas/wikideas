@@ -4,7 +4,7 @@ import { IoIosArrowBack } from 'react-icons/io';
 import s from "../styles/create.module.css"
 
 import { useNavigate, useParams } from "react-router-dom";
-import create from "../images/edit.jpg"
+import create from "../images/edit.webp"
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from "react-redux";
