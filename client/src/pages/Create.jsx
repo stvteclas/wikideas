@@ -2,7 +2,7 @@ import React, {  useState } from "react";
 import { IoIosArrowBack } from 'react-icons/io';
 import s from "../styles/create.module.css"
 import { useNavigate } from "react-router-dom";
-import create from "../images/create.jpg"
+import create from "../images/create.webp"
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from "react-redux";
@@ -33,36 +33,38 @@ const Create = () => {
   
 
     const handleTitle = (e) => {
-        e.preventDefault()
-        setTitle(e.target.value)
-        const inputValue=e.target.value
-       if (inputValue.length>=4&&inputValue.length<=45) {
-        setErrorTitle(false)
-       }else{
-        setErrorTitle(true)
-       }
-      };
-      const handleImage = (e) => {
-        e.preventDefault()
-        setImage(e.target.value)
-        if (!image.match(/^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)\??.*$/gim)) {
-          setErrorImage(false);
-        } else{
-          setErrorImage(true);
-        }
-     
+      e.preventDefault()
+      setTitle(e.target.value)
+      const inputValue=e.target.value
+      if (inputValue.length>=4 && inputValue.length<=45) {
+          setErrorTitle(false)
+      }else{
+          setErrorTitle(true)
+      }
+  };
+  
+  const handleImage = (e) => {
+    e.preventDefault()
+    setImage(e.target.value)
+    const imageUrlRegex = /^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)\??.*$/gim
+    if (!image.match(imageUrlRegex)) {
+        setErrorImage(false);
+    } else{
+        setErrorImage(true);
+    }
+};
 
-      };
-      const handleContent = (e) => {
-        e.preventDefault()
-        setContent(e.target.value)
-        const inputValue=e.target.value
-        if (inputValue.length>=255&&inputValue.length<=1000) {
-         setErrorContent(false)
-        }else{
-         setErrorContent(true)
-        }
-      };
+const handleContent = (e) => {
+  e.preventDefault()
+  setContent(e.target.value)
+  const inputValue=e.target.value
+  if (inputValue.length>=255 && inputValue.length<=1000) {
+      setErrorContent(false)
+  }else{
+      setErrorContent(true)
+  }
+};
+
     const handleBack = () => {
         navigate(-1);
         window.scrollTo(0, {behavior: 'smooth'})
@@ -74,6 +76,20 @@ const Create = () => {
       }
       function handleSubmit(e) {
         e.preventDefault();
+        if(!title || !content || !image){
+            Swal.fire({
+              title: 'All fields are required',
+              icon:"error",
+            });
+            return;
+        }
+        if (errorTitle || errorContent || errorImage) {
+            Swal.fire({
+              title: 'Check your fields',
+              icon:"error",
+            });
+            return;
+        }
         Swal.fire({
           title: 'Are you sure you want to create this article?',
           icon:"question",
@@ -81,23 +97,16 @@ const Create = () => {
           confirmButtonText: 'Save',
           denyButtonText: `Cancel`,
         }).then((result) => {
-  
-          if (result.isConfirmed) {
-          
-            let obj={title, text:content,image,theme:categories}
-            dispatch(createArticle(obj));
-            Swal.fire('Saved!', '', 'success')
-            navigate("/articles")
-            window.location.reload(false);
-            
-          } 
-        })
-        
-     
-   
-       
-       
-      }
+            if (result.isConfirmed) {
+                let obj={title, text:content,image,theme:categories}
+                dispatch(createArticle(obj));
+                Swal.fire('Saved!', '', 'success')
+                navigate("/articles")
+                window.location.reload(false);
+            } 
+        });
+    }
+
     return (
         <div className={s.container}>
             <div className={s.button_container}>
@@ -110,10 +119,10 @@ const Create = () => {
 
         </div>
         <div className={s.right} >
-            <form action="" className={s.form} onSubmit={(e) => handleSubmit(e)}  >
+            <form action="" className={s.form}  onSubmit={(e) => handleSubmit(e)}  >
                 <h4>Create article</h4>
                 <Box
-               
+              
                  sx={{
                    '& .MuiTextField-root': { m: 1, width: '100%' },
                  }}
