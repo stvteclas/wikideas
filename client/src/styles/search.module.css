@@ -1,6 +1,15 @@
 .container{
-    width: 35%;
+    width: 40%;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    caret-color: transparent;
+}
+.searchbar{
+    width: 100%;
+    display: flex;
+
     justify-content: center;
     align-items: center;
     caret-color: transparent;
@@ -25,6 +34,7 @@
 
 .container button{
     background-color: transparent;
+  
     border: none;
     position: relative;
     right: 45px;
@@ -32,4 +42,39 @@
     font-size: 30px;
     bottom: 3px;
     caret-color: transparent;
+}
+.suggestion{
+    display: flex;
+
+    justify-content:left;
+    gap: 20px;
+    align-items:center ;
+    padding: 10px;
+    
+    width:100%;
+}
+.suggestion:hover{
+    background-color: rgba(255, 228, 196, 0.216);
+  
+}
+.suggestion li{
+    list-style: none;
+}
+.suggestion img{
+width: 50px;
+
+border-radius: 4px;
+opacity: 0.5;
+}
+.ul_suggestions{
+    width: 80%;
+    margin-top: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.266);
+    position: relative;
+    right: 20px;
 }
