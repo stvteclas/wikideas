@@ -34,37 +34,39 @@ const Edit = () => {
     
   
 
+  
     const handleTitle = (e) => {
       e.preventDefault()
       setTitle(e.target.value)
       const inputValue=e.target.value
-     if (inputValue.length>=4&&inputValue.length<=45) {
-      setErrorTitle(false)
-     }else{
-      setErrorTitle(true)
-     }
-    };
-    const handleImage = (e) => {
-      e.preventDefault()
-      setImage(e.target.value)
-      if (!image.match(/^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)\??.*$/gim)) {
-        setErrorImage(false);
-      } else{
-        setErrorImage(true);
-      }
-   
-
-    };
-    const handleContent = (e) => {
-      e.preventDefault()
-      setContent(e.target.value)
-      const inputValue=e.target.value
-      if (inputValue.length>=255&&inputValue.length<=1000) {
-       setErrorContent(false)
+      if (inputValue.length>=4 && inputValue.length<=45) {
+          setErrorTitle(false)
       }else{
-       setErrorContent(true)
+          setErrorTitle(true)
       }
-    };
+  };
+  
+  const handleImage = (e) => {
+    e.preventDefault()
+    setImage(e.target.value)
+    const imageUrlRegex = /^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)\??.*$/gim
+    if (!image.match(imageUrlRegex)) {
+        setErrorImage(false);
+    } else{
+        setErrorImage(true);
+    }
+};
+
+const handleContent = (e) => {
+  e.preventDefault()
+  setContent(e.target.value)
+  const inputValue=e.target.value
+  if (inputValue.length>=255 && inputValue.length<=1000) {
+      setErrorContent(false)
+  }else{
+      setErrorContent(true)
+  }
+};
     const handleBack = () => {
         navigate(-1);
         window.scrollTo(0, {behavior: 'smooth'})
