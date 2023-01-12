@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "../styles/articles.module.css";
-import image from "../images/hoya.png";
+import image from "../images/hoya.webp";
 import {HiChevronDoubleRight} from "react-icons/hi"
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';

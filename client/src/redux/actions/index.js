@@ -62,6 +62,7 @@ export function getThemes() {
 
 //----------Create Article------------
 export function createArticle(obj) {
+
   return dispatch => {
     // Hace la petición POST y envía los datos en el cuerpo de la solicitud
     return axios.post('http://localhost:8080/article/create', obj)
@@ -90,10 +91,10 @@ export function deleteArticle(id) {
 
 
 //----------Edit Article------------
-export function editArticle(body,id) {
+export function editArticle(id,obj) {
   return async function (dispatch) {
     return axios
-      .patch( `http://localhost:8080/article/update/${id}`,body)
+      .patch( `http://localhost:8080/article/update/${id}`,obj)
       .then((res) => {
         dispatch({
           type: UPDATE_ARTICLE,
