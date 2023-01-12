@@ -4,7 +4,6 @@ import { IoIosArrowBack } from "react-icons/io";
 import {FiEdit}from "react-icons/fi";
 import {MdDeleteForever}from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
-import plans from "../images/marte.webp";
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteArticle, getArticleById } from '../redux/actions';
 import Swal from 'sweetalert2'
@@ -16,7 +15,7 @@ const Article = () => {
     useEffect(()=>{
      dispatch(getArticleById(id))
   
-    },[dispatch])
+    },[dispatch,id])
     function handleDelete(e) {
       e.preventDefault();
       Swal.fire({
@@ -63,7 +62,7 @@ const Article = () => {
         <div className={s.register}>
           <h5 className={s.title}>{article?.title}</h5>
          <p  className={s.welcome}>{article?.text} </p>
-         <span>Publish date: {article.creationDate? article?.creationDate.slice(0,10):null}</span>
+         <span>Publish date: {article.creationDate? `${article?.creationDate[0]} /${article?.creationDate[1]<9? `0 ${article?.creationDate[1]}`: article?.creationDate[1] }/ ${ article?.creationDate[2]} `:null}</span>
          <div className={s.btn_container}>
             <button className={s.btn_edit} onClick={()=>navigate(`/edit/${id}`)}>
                 <FiEdit/>

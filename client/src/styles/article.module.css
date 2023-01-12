@@ -13,7 +13,7 @@
 
 }
 .wraper{
-   width:70vw;
+   width:80vw;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -24,8 +24,12 @@
 
 }
 .image{
-    width: 100%;
+    width: 40%;
     height: 100%;
+}
+.image:hover{
+    width: 100%;
+    transform: scale(1.2);
 }
 .image img{
     width: 100%;
@@ -39,7 +43,7 @@
     }
 
     .register{
-        width: 50%;
+        width: 40%;
         height: 100%;
   
         background-color: #6f5e4b;

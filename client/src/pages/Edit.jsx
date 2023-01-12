@@ -1,14 +1,14 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from 'react-redux';
 import { IoIosArrowBack } from 'react-icons/io';
 import s from "../styles/create.module.css"
-import { BsImageFill, BsEyeFill } from "react-icons/bs";
+
 import { useNavigate, useParams } from "react-router-dom";
 import create from "../images/create.jpg"
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from "react-redux";
-import { createArticle, editArticle, getThemes } from "../redux/actions";
+import { editArticle } from "../redux/actions";
 import Swal from 'sweetalert2'
 
 const Edit = () => {
@@ -16,15 +16,17 @@ const Edit = () => {
     const navigate = useNavigate();
     const dispatch= useDispatch()
 
-    const [errorTitle, setErrorTitle] = useState(false);
-    const [errorImage, setErrorImage] = useState(false);
-    const[helperTitle, setHelperTitle]= useState("Please enter title")
-    const[helperImage, setHelperImage]= useState("Please enter image url")
+  
     const[title,setTitle]=useState("")
-    const[image,setImage]=useState("")
-    const [errorContent, setErrorContent] = useState(false);
-    const[helperContent, setHelperContent]= useState("Please write a content")
+    const [errorTitle, setErrorTitle] = useState(false);
+
     const[content,setContent]=useState("")
+    const [errorContent, setErrorContent] = useState(false);
+
+
+    const[image,setImage]=useState("")
+    const [errorImage, setErrorImage] = useState(false);
+  
     const[categories, setCategories]=useState("all")
     const themes = useSelector((state)=>state.articlesReducers.themes)
     const { id } = useParams();
@@ -33,50 +35,36 @@ const Edit = () => {
   
 
     const handleTitle = (e) => {
-        e.preventDefault()
-        setTitle(e.target.value)
-        if (title.length > 20) {
-          setErrorTitle(true);
-          setHelperTitle("title cannot be longer than 20 characters");
-        } else if (title.length < 3) {
-          setErrorTitle(true);
-          setHelperTitle("title cannot be lower than 10 characters");
-        } else {
-          setErrorTitle(false);
-          setHelperTitle("");
-        }
-     
+      e.preventDefault()
+      setTitle(e.target.value)
+      const inputValue=e.target.value
+     if (inputValue.length>=4&&inputValue.length<=45) {
+      setErrorTitle(false)
+     }else{
+      setErrorTitle(true)
+     }
+    };
+    const handleImage = (e) => {
+      e.preventDefault()
+      setImage(e.target.value)
+      if (!image.match(/^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)\??.*$/gim)) {
+        setErrorImage(false);
+      } else{
+        setErrorImage(true);
+      }
+   
 
-      };
-      const handleImage = (e) => {
-        e.preventDefault()
-        setImage(e.target.value)
-        if (!image.match(/^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)\??.*$/gim)) {
-          setErrorImage(true);
-          setErrorImage("Enter a valid image url");
-        } else{
-          setErrorImage(false);
-          setHelperImage("");
-        }
-     
-
-      };
-      const handleContent = (e) => {
-        e.preventDefault()
-        setContent(e.target.value)
-        if (content.length > 1000) {
-          setErrorContent(true);
-          setHelperContent("title cannot be longer than 1000 characters");
-        } else if (content.length < 55) {
-          setErrorContent(true);
-          setHelperContent("title cannot be lower than 255 characters");
-        } else {
-          setErrorContent(false);
-          setHelperContent("");
-        }
-     
-
-      };
+    };
+    const handleContent = (e) => {
+      e.preventDefault()
+      setContent(e.target.value)
+      const inputValue=e.target.value
+      if (inputValue.length>=255&&inputValue.length<=1000) {
+       setErrorContent(false)
+      }else{
+       setErrorContent(true)
+      }
+    };
     const handleBack = () => {
         navigate(-1);
         window.scrollTo(0, {behavior: 'smooth'})
@@ -135,31 +123,34 @@ const Edit = () => {
             >
                    <TextField
                    value={title}
-    error={errorTitle}
+  
       id="filled-textarea"
       label="Title"
       placeholder="Title"
-      helperText={helperTitle}
+      error={errorTitle}
+      helperText={errorTitle&& title.length<=4?"title must longer than 4 characters":title.length>=45?"title must lower than 45 characters":""}
       onChange={(e)=>handleTitle(e)}
     />
         <TextField
         value={content}
-         error={errorContent}
+    
       id="outlined-multiline-static"
       label="Content"
       multiline
       rows={2}
       placeholder="Content"
-      helperText={helperContent}
+      error={errorContent}
+      helperText={errorContent&& content.length<=255?"content must longer than 255 characters":content.length>=1000?"content must lower than 1000 characters":""}
       onChange={(e)=>handleContent(e)}
     />
     <TextField
     value={image}
-    error={errorImage}
+
       id="filled-textarea"
       label="Image URL"
       placeholder="Image URL"
-      helperText={helperImage}
+      error={errorImage}
+      helperText={errorImage? "Enter a valid image url":""}
       onChange={(e)=>handleImage(e)}
     />
      <select

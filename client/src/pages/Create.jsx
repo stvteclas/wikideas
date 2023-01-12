@@ -1,33 +1,31 @@
-import React, { useRef, useState, useEffect } from "react";
-import { connect } from 'react-redux';
+import React, {  useState } from "react";
 import { IoIosArrowBack } from 'react-icons/io';
 import s from "../styles/create.module.css"
-import { BsImageFill, BsEyeFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import create from "../images/create.jpg"
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from "react-redux";
-import { createArticle, getThemes } from "../redux/actions";
+import { createArticle } from "../redux/actions";
 import Swal from 'sweetalert2'
 
-// const allCategories = ["easy care", "tabletop", "pet friendly"];
-// const allSize = ["mini", "small", "medium", "large"];
 
 const Create = () => {
 
     const navigate = useNavigate();
     const dispatch= useDispatch()
 
-    const [errorTitle, setErrorTitle] = useState(false);
-    const [errorImage, setErrorImage] = useState(false);
-    const[helperTitle, setHelperTitle]= useState("Please enter title")
-    const[helperImage, setHelperImage]= useState("Please enter image url")
     const[title,setTitle]=useState("")
-    const[image,setImage]=useState("")
-    const [errorContent, setErrorContent] = useState(false);
-    const[helperContent, setHelperContent]= useState("Please write a content")
+    const [errorTitle, setErrorTitle] = useState(false);
+
     const[content,setContent]=useState("")
+    const [errorContent, setErrorContent] = useState(false);
+
+
+    const[image,setImage]=useState("")
+    const [errorImage, setErrorImage] = useState(false);
+  
+
     const[categories, setCategories]=useState("all")
     const themes = useSelector((state)=>state.articlesReducers.themes)
 
@@ -37,28 +35,20 @@ const Create = () => {
     const handleTitle = (e) => {
         e.preventDefault()
         setTitle(e.target.value)
-        if (title.length > 45) {
-          setErrorTitle(true);
-          setHelperTitle("title cannot be longer than 45 characters");
-        } else if (title.length < 10) {
-          setErrorTitle(true);
-          setHelperTitle("title cannot be lower than 10 characters");
-        } else {
-          setErrorTitle(false);
-          setHelperTitle("");
-        }
-     
-
+        const inputValue=e.target.value
+       if (inputValue.length>=4&&inputValue.length<=45) {
+        setErrorTitle(false)
+       }else{
+        setErrorTitle(true)
+       }
       };
       const handleImage = (e) => {
         e.preventDefault()
         setImage(e.target.value)
         if (!image.match(/^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)\??.*$/gim)) {
-          setErrorImage(true);
-          setErrorImage("Enter a valid image url");
-        } else{
           setErrorImage(false);
-          setHelperImage("");
+        } else{
+          setErrorImage(true);
         }
      
 
@@ -66,18 +56,12 @@ const Create = () => {
       const handleContent = (e) => {
         e.preventDefault()
         setContent(e.target.value)
-        if (content.length > 1000) {
-          setErrorContent(true);
-          setHelperContent("title cannot be longer than 1000 characters");
-        } else if (content.length < 55) {
-          setErrorContent(true);
-          setHelperContent("title cannot be lower than 255 characters");
-        } else {
-          setErrorContent(false);
-          setHelperContent("");
+        const inputValue=e.target.value
+        if (inputValue.length>=255&&inputValue.length<=1000) {
+         setErrorContent(false)
+        }else{
+         setErrorContent(true)
         }
-     
-
       };
     const handleBack = () => {
         navigate(-1);
@@ -93,7 +77,6 @@ const Create = () => {
         Swal.fire({
           title: 'Are you sure you want to create this article?',
           icon:"question",
-          showDenyButton: true,
           showCancelButton: true,
           confirmButtonText: 'Save',
           denyButtonText: `Cancel`,
@@ -107,10 +90,7 @@ const Create = () => {
             navigate("/articles")
             window.location.reload(false);
             
-          } else if (result.isDenied) {
-            Swal.fire('Changes are not saved', '', 'info')
-    
-          }
+          } 
         })
         
      
@@ -133,40 +113,43 @@ const Create = () => {
             <form action="" className={s.form} onSubmit={(e) => handleSubmit(e)}  >
                 <h4>Create article</h4>
                 <Box
-                 component="form"
+               
                  sx={{
                    '& .MuiTextField-root': { m: 1, width: '100%' },
                  }}
                  noValidate
-                 autoComplete="off"
+                 autoComplete="on"
                 >
-                       <TextField
+                       <TextField                
                        value={title}
-        error={errorTitle}
+                       autoComplete="on"
           id="filled-textarea"
           label="Title"
           placeholder="Title"
-          helperText={helperTitle}
+          error={errorTitle}
+          helperText={errorTitle&& title.length<=4?"title must longer than 4 characters":title.length>=45?"title must lower than 45 characters":""}
           onChange={(e)=>handleTitle(e)}
         />
             <TextField
+            autoComplete="on"
             value={content}
-             error={errorContent}
-          id="outlined-multiline-static"
-          label="Content"
-          multiline
-          rows={2}
-          placeholder="Content"
-          helperText={helperContent}
+            id="outlined-multiline-static"
+            label="Content"
+            multiline
+            rows={2}
+            placeholder="Content"
+            error={errorContent}
+          helperText={errorContent&& content.length<=255?"content must longer than 255 characters":content.length>=1000?"content must lower than 1000 characters":""}
           onChange={(e)=>handleContent(e)}
         />
         <TextField
+         autoComplete="on"
         value={image}
+        id="filled-textarea"
+        label="Image URL"
+        placeholder="Image URL"
         error={errorImage}
-          id="filled-textarea"
-          label="Image URL"
-          placeholder="Image URL"
-          helperText={helperImage}
+          helperText={errorImage? "Enter a valid image url":""}
           onChange={(e)=>handleImage(e)}
         />
          <select
@@ -200,4 +183,4 @@ const Create = () => {
     );
 };
 
-export default connect()(Create);
+export default(Create);
