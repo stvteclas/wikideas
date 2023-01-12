@@ -4,7 +4,7 @@ import { IoIosArrowBack } from 'react-icons/io';
 import s from "../styles/create.module.css"
 
 import { useNavigate, useParams } from "react-router-dom";
-import create from "../images/create.jpg"
+import create from "../images/edit.jpg"
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from "react-redux";
@@ -47,7 +47,7 @@ const Edit = () => {
     const handleImage = (e) => {
       e.preventDefault()
       setImage(e.target.value)
-      if (image.match(/^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)\??.*$/gim)) {
+      if (!image.match(/^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)\??.*$/gim)) {
         setErrorImage(false);
       } else{
         setErrorImage(true);
