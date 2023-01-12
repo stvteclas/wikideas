@@ -47,25 +47,34 @@ const Articles = () => {
                 
               
               <div className={s.favorite_list}>
-              {articles &&articles?.map((article) => {
-                return (
-                  <div className={s.card} key={article?.id}>
-                    <img src={article?.image} alt="" />
-                    <div className={s.specs}>
-                      <h5>{article?.title}</h5>
-                      <p >{article&&article?.text?.slice(0,50)}...</p>
-                      <div className={s.more} onClick={()=>navigate(`article/${article?.id}`)}>
-                        <span>see more</span>
-                        <button className={s.more_btn}><HiChevronDoubleRight/></button>
-
+                {
+                  articles?.length>0?
+                  <>
+                  {articles &&articles?.map((article) => {
+                    return (
+                      <div className={s.card} key={article?.id}>
+                        <img src={article?.image} alt="" />
+                        <div className={s.specs}>
+                          <h5>{article?.title}</h5>
+                          <p >{article&&article?.text?.slice(0,50)}...</p>
+                          <div className={s.more} onClick={()=>navigate(`article/${article?.id}`)}>
+                            <span>see more</span>
+                            <button className={s.more_btn}><HiChevronDoubleRight/></button>
+    
+                          </div>
+                          <div>
+                          
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                      
-                      </div>
-                    </div>
+                    );
+                  })}
+                  </>:
+                  <div className={s.empty}>
+                    <img src="" alt="" />
                   </div>
-                );
-              })}
+                }
+         
               
               </div>
             </div>
