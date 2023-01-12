@@ -1,4 +1,6 @@
-INSERT INTO themes (theme, description)
+INSERT INTO `Wikideas`.`themes`
+(`description`,
+ `theme`)
 VALUES
     ( 'ACTUALIDAD', 'ACTUALIDAD'),
     ('AGRICULTURA','AGRICULTURA'),
