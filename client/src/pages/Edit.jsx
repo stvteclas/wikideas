@@ -47,7 +47,7 @@ const Edit = () => {
     const handleImage = (e) => {
       e.preventDefault()
       setImage(e.target.value)
-      if (!image.match(/^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)\??.*$/gim)) {
+      if (image.match(/^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)\??.*$/gim)) {
         setErrorImage(false);
       } else{
         setErrorImage(true);
