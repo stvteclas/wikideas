@@ -5,6 +5,7 @@ import lombok.*;
 @ToString
 @Builder(toBuilder = true)
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class MessageDTO {

@@ -1,5 +1,5 @@
 import {
-    GET_ARTICLES, GET_ARTICLE_BY_ID, FILTER_BY_CATEGORY, GET_THEMES
+    GET_ARTICLES, GET_ARTICLE_BY_ID, FILTER_BY_CATEGORY, GET_THEMES, CREATE_ARTICLE, DELETE_ARTICLE, UPDATE_ARTICLE
   
   } from "../actions";
   const initialState = {
@@ -40,6 +40,15 @@ import {
                 ...state,
                 themes:action.payload
               };
+              case CREATE_ARTICLE:
+                return action.payload;
+                case DELETE_ARTICLE:
+                  return {
+                    ...state,
+                    articles: state.articles,
+                  };
+                  case UPDATE_ARTICLE:
+                    return action.payload;
       default:
         return state;
     }

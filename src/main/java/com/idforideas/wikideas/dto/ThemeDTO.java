@@ -1,15 +1,14 @@
 package com.idforideas.wikideas.dto;
 
-import com.idforideas.wikideas.dto.validator.IValidatorArticle;
 import com.idforideas.wikideas.dto.validator.IValidatorTheme;
 import com.idforideas.wikideas.model.ThemeEntity;
 import com.idforideas.wikideas.model.ThemeEnum;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder(toBuilder = true)
 @Getter
 @Setter

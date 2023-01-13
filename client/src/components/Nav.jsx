@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import oec from "../images/oec-white.png"
+import oec from "../images/oec-white.webp"
 import"../styles/nav.css"
 
 const Nav = () => {
@@ -27,7 +27,7 @@ const Nav = () => {
               </li>
               <li className="nav-item">
                 
-               <button className='collaborate' onClick={()=>navigate("/create")}>CREATE ARTICLE </button>
+               <button type='button' className='collaborate' onClick={()=>navigate("/create")}>CREATE ARTICLE </button>
               </li>
               
             </ul>

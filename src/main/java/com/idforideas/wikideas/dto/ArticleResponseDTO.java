@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder(toBuilder = true)
 @Getter
 @Setter
@@ -35,8 +36,4 @@ public class ArticleResponseDTO {
         creationDate = article.getCreationDate();
         updateDate = article.getUpdateDate();
     }
-
-
-//    @NotNull
-//    private String idTheme;
 }

@@ -125,13 +125,18 @@ width: 100%;
 }
 .specs{
     width: 100%;
-    margin-right: 20px;
+
+
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: left;
     text-align: left;
   
+}
+.specs p{
+    font-size: small;
+    flex-wrap: wrap;
 }
 .more{
     width: 100%;

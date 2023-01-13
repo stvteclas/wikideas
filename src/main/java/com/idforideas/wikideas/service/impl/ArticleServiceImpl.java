@@ -39,10 +39,6 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public ResponseEntity<Object> updateArticle(Long id, ArticleDTO article) {
         DTOValidator.validate(article, IValidatorArticle.class);
-        Optional<ArticleEntity> opArticle = articleDAO.findById(id);
-        if (!opArticle.isEmpty()){
-            throw new WikiException("article does not  exist");
-        }
         ArticleEntity articleEntity = articleDAO.updateArticle(id, article);
         ArticleResponseDTO response = responseDTO(articleEntity);
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -97,7 +93,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public ResponseEntity<ArticleResponseDTO> getArticleById(Long id) {
         Optional<ArticleEntity> opArticle = articleDAO.findById(id);
-        if (!opArticle.isEmpty()){
+        if (!opArticle.isPresent()){
             throw new WikiException("article does not  exist");
         }
         ArticleResponseDTO response = responseDTO(opArticle.get());

@@ -6,11 +6,11 @@ import com.idforideas.wikideas.model.ThemeEnum;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder(toBuilder = true)
 @Getter
 @Setter
