@@ -1,7 +1,7 @@
 
   .container{
     width: 100%;
-    height: 100vh;
+
     background-size:cover;
     background-repeat: no-repeat;
     background-position: bottom;
@@ -28,8 +28,11 @@
     gap: 1rem;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+height: 100vh;
+    position: relative;
+
     caret-color: transparent;
+    
   }
   .brand{
     display: flex;
@@ -37,6 +40,8 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    position: relative;
+    bottom: 80px;
   }
   .brand img{
     width: 15rem;

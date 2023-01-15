@@ -88,7 +88,7 @@ const handleContent = (e) => {
           if (result.isConfirmed) {
           
             let obj={title, text:content,image,theme:categories}
-            dispatch(editArticle(obj,id));
+            dispatch(editArticle(id,obj));
             Swal.fire('Saved!', '', 'success')
             navigate("/articles")
             window.location.reload(false);

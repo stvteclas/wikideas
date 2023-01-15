@@ -48,6 +48,9 @@ const Article = () => {
 
 
     return (
+      <>
+      {
+  article.image?
         <div className={s.container}>
         <div className={s.button_container}>
             <button onClick={()=>navigate(-1)} className={s.back}>
@@ -76,7 +79,12 @@ const Article = () => {
             
         </div>
       </div>
+    </div>:
+    <div className={s.container}>
+     <h1>Loading...</h1>
     </div>
+}
+      </>
     );
 };
 

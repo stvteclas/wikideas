@@ -73,6 +73,21 @@ export function createArticle(obj) {
       });
   };
 }
+//----------Edit Article------------
+export function editArticle(id,obj) {
+
+  return dispatch => {
+    return axios
+      .patch( `http://localhost:8080/article/update/${id}`,obj)
+      .then((res) => {
+        dispatch({
+          type: UPDATE_ARTICLE,
+          payload: res.data,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+}
 
 //----------Delete Article------------
 export function deleteArticle(id) {
@@ -90,17 +105,3 @@ export function deleteArticle(id) {
 }
 
 
-//----------Edit Article------------
-export function editArticle(id,obj) {
-  return async function (dispatch) {
-    return axios
-      .patch( `http://localhost:8080/article/update/${id}`,obj)
-      .then((res) => {
-        dispatch({
-          type: UPDATE_ARTICLE,
-          payload: res.data,
-        });
-      })
-      .catch((err) => console.log(err));
-  };
-}
