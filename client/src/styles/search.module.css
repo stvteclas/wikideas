@@ -1,6 +1,18 @@
 .container{
     width: 35%;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    caret-color: transparent;
+    position: relative;
+    bottom: 80px;
+}
+.searchbar{
+    width: 100%;
+    height: 100%;
+    display: flex;
+
     justify-content: center;
     align-items: center;
     caret-color: transparent;
@@ -11,10 +23,12 @@
     border-radius: 17px;
     background-color: rgba(53, 50, 50, 0.306);
     width: 100%;
+
     border: none;
     caret-color: rgb(7, 7, 7);
     color: rgb(100, 49, 19);
     font-family: "Inter", sans-serif;
+
 }
 .container input::placeholder{
     color: rgb(210, 209, 209);
@@ -25,6 +39,7 @@
 
 .container button{
     background-color: transparent;
+  
     border: none;
     position: relative;
     right: 45px;
@@ -33,3 +48,53 @@
     bottom: 3px;
     caret-color: transparent;
 }
+.suggestion{
+    display: flex;
+
+    justify-content:left;
+    gap: 20px;
+    align-items:center ;
+    padding: 10px;
+    border-radius: 20px;
+    position: relative;
+    right: 20px;
+
+    opacity: 0.7;
+    width:100%;
+}
+.suggestion:hover{
+    background-color: rgba(255, 228, 196, 0.216);
+  
+}
+.suggestion li{
+    list-style: none;
+}
+.suggestion img{
+width: 50px;
+height: 30px;
+
+border-radius: 4px;
+
+}
+.suggestion:hover{
+   cursor: pointer;
+    opacity: 1;
+    }
+.ul_suggestions{
+    width: 80%;
+    height: 150px;
+    overflow-y: scroll;
+    border-radius: 20px;
+    display: block;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.266);
+    position: absolute;
+   top: 70px;
+   left: 30px;
+}
+.ul_suggestions::-webkit-scrollbar {
+    display: none;
+}
+

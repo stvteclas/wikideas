@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import s from "../styles/articles.module.css";
 import image from "../images/hoya.webp";
 import {HiChevronDoubleRight} from "react-icons/hi"
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { filterByCategorie } from '../redux/actions';
+import { filterByCategorie, getArticles, getThemes } from '../redux/actions';
 
 const Articles = () => {
   const navigate= useNavigate()
   const dispatch= useDispatch()
 
+  useEffect(()=>{
+    dispatch(getArticles())
+    dispatch(getThemes())
+ 
+   },[dispatch])
+ 
 
   const articles = useSelector((state)=>state.articlesReducers.articles)
   const themes = useSelector((state)=>state.articlesReducers.themes)
@@ -56,7 +62,7 @@ const Articles = () => {
                         <img src={article?.image} alt="" />
                         <div className={s.specs}>
                           <h5>{article?.title}</h5>
-                          <p >{article&&article?.text?.slice(0,50)}...</p>
+                          <p >{article&&article?.text?.slice(0,40)}...</p>
                           <div className={s.more} onClick={()=>navigate(`article/${article?.id}`)}>
                             <span>see more</span>
                             <button className={s.more_btn}><HiChevronDoubleRight/></button>
