@@ -8,7 +8,7 @@ import create from "../images/edit.webp"
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from "react-redux";
-import { editArticle } from "../redux/actions";
+import { editArticle, showLoading } from "../redux/actions";
 import Swal from 'sweetalert2'
 
 const Edit = () => {
@@ -68,6 +68,7 @@ const handleContent = (e) => {
   }
 };
     const handleBack = () => {
+      dispatch(showLoading())
         navigate(-1);
         window.scrollTo(0, {behavior: 'smooth'})
       };
@@ -88,18 +89,12 @@ const handleContent = (e) => {
           if (result.isConfirmed) {
           
             let obj={title, text:content,image,theme:categories}
-            dispatch(editArticle(obj,id));
+            dispatch(editArticle(id,obj));
             Swal.fire('Saved!', '', 'success')
-            navigate("/articles")
-            window.location.reload(false);
+          
             
           } 
-        })
-        
-     
-   
-       
-       
+        }) 
       }
     return (
         <div className={s.container}>
@@ -116,12 +111,12 @@ const handleContent = (e) => {
         <form action="" className={s.form} onSubmit={(e) => handleSubmit(e)}  >
             <h4>Edit article</h4>
             <Box
-             component="form"
+          
              sx={{
                '& .MuiTextField-root': { m: 1, width: '100%' },
              }}
              noValidate
-             autoComplete="off"
+             autoComplete="on"
             >
                    <TextField
                    value={title}

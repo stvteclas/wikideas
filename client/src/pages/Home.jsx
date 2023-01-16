@@ -1,13 +1,21 @@
 import React, { useEffect } from 'react';
 import s from "../styles/home.module.css"
-import castle from "../images/castle.webp"
+
 import oek from "../images/oec.webp"
 import SearchBar from '../components/SearchBar';
 import { useDispatch, useSelector } from 'react-redux';
-import { getArticles, getThemes } from '../redux/actions/index.js';
+import { showLoading } from '../redux/actions';
+
 
 
 const Home = () => {
+  const dispatch = useDispatch();
+
+
+  useEffect(()=>{
+dispatch(showLoading())
+
+  },[])
 
 
 
