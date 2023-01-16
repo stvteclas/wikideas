@@ -8,6 +8,7 @@ import { refresh } from '../redux/actions';
 const SearchBar = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [suggestions, setSuggestions] = useState([]);
+
     const articles = useSelector((state) => state.articlesReducers.articles);
 const navigate= useNavigate()
 const dispatch= useDispatch()
@@ -37,7 +38,7 @@ const dispatch= useDispatch()
         </div>
 
        {
-        searchTerm.length>0&&
+        searchTerm.length>0&& suggestions.length>0?
 
        <ul className={s.ul_suggestions}>
         {suggestions.map((suggestion) => (
@@ -47,7 +48,7 @@ const dispatch= useDispatch()
             </div>
           
         ))}
-      </ul>
+      </ul>:null
        }
        </div>
      
