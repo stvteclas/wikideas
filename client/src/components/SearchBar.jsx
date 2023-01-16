@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import s from "../styles/search.module.css"
 import {TbSearch} from "react-icons/tb"
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate  } from "react-router-dom";
+import { refresh } from '../redux/actions';
 
 const SearchBar = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [suggestions, setSuggestions] = useState([]);
     const articles = useSelector((state) => state.articlesReducers.articles);
 const navigate= useNavigate()
+const dispatch= useDispatch()
 
     const handleChange = (event) => {
       setSearchTerm(event.target.value);
@@ -17,6 +19,13 @@ const navigate= useNavigate()
       );
       setSuggestions(filteredArticles);
     };
+    function handleClick(e,id) {
+      e.preventDefault();
+      navigate(`/articles/article/${id}`)
+      
+     
+    }
+
     return (
        <div action="" className={s.container} >
         <div className={s.searchbar}>
@@ -32,7 +41,7 @@ const navigate= useNavigate()
 
        <ul className={s.ul_suggestions}>
         {suggestions.map((suggestion) => (
-            <div key={suggestion.id} className={s.suggestion} onClick={()=>navigate(`/articles/article/${suggestion?.id}`)}>
+            <div key={suggestion.id} className={s.suggestion} onClick={(e)=>handleClick(e,suggestion?.id)}>
                 <img src={suggestion.image} alt="" />
               <li>{suggestion.title}</li>
             </div>

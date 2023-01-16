@@ -14,6 +14,7 @@ const Create = () => {
 
     const navigate = useNavigate();
     const dispatch= useDispatch()
+    
 
     const[title,setTitle]=useState("")
     const [errorTitle, setErrorTitle] = useState(false);
@@ -90,6 +91,13 @@ const handleContent = (e) => {
             });
             return;
         }
+        if (!image.match(/^https?:\/\/.*\/.*\.(png|gif|webp|jpeg|jpg)\??.*$/gim)) {
+          Swal.fire({
+            title: 'Enter a valid url image',
+            icon:"error",
+          });
+          return;
+      }
         Swal.fire({
           title: 'Are you sure you want to create this article?',
           icon:"question",
@@ -101,8 +109,7 @@ const handleContent = (e) => {
                 let obj={title, text:content,image,theme:categories}
                 dispatch(createArticle(obj));
                 Swal.fire('Saved!', '', 'success')
-                navigate("/articles")
-                window.location.reload(false);
+           
             } 
         });
     }

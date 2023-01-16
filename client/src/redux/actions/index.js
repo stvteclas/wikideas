@@ -7,6 +7,9 @@ export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const CREATE_ARTICLE = "CREATE_ARTICLE";
 export const DELETE_ARTICLE = "DELETE_ARTICLE";
 export const UPDATE_ARTICLE = "UPDATE_ARTICLE";
+export const REFRESH="REFRESH";
+export const SHOW_LOADING="SHOW_LOADING"
+
 
 
 //Get all Articles------------
@@ -91,7 +94,7 @@ export function editArticle(id,obj) {
 
 //----------Delete Article------------
 export function deleteArticle(id) {
-  return async function (dispatch) {
+  return dispatch=> {
     return axios
       .delete( `http://localhost:8080/article/delete/${id}`)
       .then((res) => {
@@ -104,4 +107,17 @@ export function deleteArticle(id) {
   };
 }
 
+//-----REFRESH-----
 
+export const refresh = () => (dispatch) => {
+  dispatch({
+    type: REFRESH,
+  });
+};
+//-----HIDE LOADING-----
+
+export const showLoading = () => (dispatch) => {
+  dispatch({
+    type: SHOW_LOADING,
+  });
+};

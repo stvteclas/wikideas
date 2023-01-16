@@ -1,12 +1,13 @@
 import {
-    GET_ARTICLES, GET_ARTICLE_BY_ID, FILTER_BY_CATEGORY, GET_THEMES, CREATE_ARTICLE, DELETE_ARTICLE, UPDATE_ARTICLE
+    GET_ARTICLES, GET_ARTICLE_BY_ID, FILTER_BY_CATEGORY, GET_THEMES, CREATE_ARTICLE, DELETE_ARTICLE, UPDATE_ARTICLE, REFRESH, SHOW_LOADING
   
   } from "../actions";
   const initialState = {
     articles: [],
     allArticles:[],
     article:{},
-    themes:[]
+    themes:[],
+    loading:false
     
   };
   
@@ -16,12 +17,15 @@ import {
         return {
           ...state,
           articles:  action.payload,
-          allArticles:  action.payload
+          allArticles:  action.payload,
+          loading:true
+        
         }
         case GET_ARTICLE_BY_ID:
           return {
             ...state,
             article:action.payload,
+            loading:true
           };
           case FILTER_BY_CATEGORY:
             const filterCategory = state.allArticles;
@@ -43,12 +47,27 @@ import {
               case CREATE_ARTICLE:
                 return action.payload;
                 case DELETE_ARTICLE:
-                  return {
-                    ...state,
-                    articles: state.articles,
-                  };
+                  return action.payload;
                   case UPDATE_ARTICLE:
-                    return action.payload;
+                    return{
+                      ...state,
+                      articles: state.articles,
+                
+                                          };
+                                          case REFRESH:
+                                            return {
+                                              ...state,
+                                              loading: true,
+                                            };
+                                            case SHOW_LOADING:
+                                              return {
+                                                ...state,
+                                                loading: false,
+                                              };
+
+                    
+                  
+                 
       default:
         return state;
     }
