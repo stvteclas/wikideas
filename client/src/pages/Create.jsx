@@ -67,7 +67,7 @@ const handleContent = (e) => {
 };
 
     const handleBack = () => {
-        navigate(-1);
+        navigate("/articles");
         window.scrollTo(0, {behavior: 'smooth'})
       };
       function handleSelect(e) {
@@ -109,6 +109,7 @@ const handleContent = (e) => {
                 let obj={title, text:content,image,theme:categories}
                 dispatch(createArticle(obj));
                 Swal.fire('Saved!', '', 'success')
+                window.location.reload();
            
             } 
         });
