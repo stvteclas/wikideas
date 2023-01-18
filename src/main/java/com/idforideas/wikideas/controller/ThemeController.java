@@ -10,7 +10,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.DELETE, RequestMethod.GET, RequestMethod.PATCH, RequestMethod.POST, RequestMethod.OPTIONS})
-@RequestMapping("/themes")
+@RequestMapping(value = "/themes", method = {RequestMethod.OPTIONS})
 public class ThemeController {
 
     private final ThemeService themeService;
