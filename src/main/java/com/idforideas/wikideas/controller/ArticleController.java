@@ -15,8 +15,8 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@CrossOrigin(origins = "*", methods = {RequestMethod.DELETE, RequestMethod.GET, RequestMethod.PATCH, RequestMethod.POST, RequestMethod.OPTIONS})
-@RequestMapping(value = "/article", method = {RequestMethod.OPTIONS})
+//@CrossOrigin(origins = "*", methods = {RequestMethod.DELETE, RequestMethod.GET, RequestMethod.PATCH, RequestMethod.POST, RequestMethod.OPTIONS})
+@RequestMapping(value = "/article")
 public class ArticleController {
     private final ArticleService articleService;
 
