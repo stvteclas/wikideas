@@ -15,7 +15,7 @@
 .mvnw
 .mvnw.cmd
 .vscode
-.client
+
 .JAR
 .node_modules
 .idea
