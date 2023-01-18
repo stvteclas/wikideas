@@ -38,10 +38,6 @@ public class ArticleDAO {
     }
 
     public ArticleEntity createArticle(ArticleDTO article){
-        Optional<ThemeEnum> theme1 = Optional.ofNullable(article.getTheme());
-        if (!theme1.isPresent()){
-            throw new WikiException(MessageErrorEnum.INVALID_THEME.getMessage());
-        }
         ThemeEntity themeEntity = themeRepository.findByTheme(article.getTheme());
         ArticleEntity articleEntity = ArticleEntity.builder()
                 .title(article.getTitle())
