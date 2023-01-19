@@ -16,13 +16,11 @@ public class ThemeController {
 
     private final ThemeService themeService;
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping()
     public List<ThemeDTO> showAllThemes (){
         return themeService.showAllThemes();
     }
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/{id}")
     public List<ThemeDTO> getThemeById(@PathVariable Long id){
         return themeService.getThemeById(id);
