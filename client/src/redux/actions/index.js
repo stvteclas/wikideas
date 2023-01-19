@@ -32,7 +32,7 @@ export function getArticles() {
     return async (dispatch) => {
       axios
         .get(
-          `https://wikideas-production.up.railway.app/article/articles/${id}`
+          `https://wikideas-production.up.railway.app/article/${id}`
         )
         .then((res) =>
           dispatch({ type: GET_ARTICLE_BY_ID, payload: res.data })
@@ -52,7 +52,7 @@ export function getArticles() {
 export function getThemes() {
   return async function (dispatch) {
     return axios
-      .get("https://wikideas-production.up.railway.app/article/articles/themes")
+      .get("https://wikideas-production.up.railway.app/themes")
       .then((res) => {
         dispatch({
           type: GET_THEMES,
@@ -68,7 +68,7 @@ export function createArticle(obj) {
 
   return dispatch => {
     // Hace la petición POST y envía los datos en el cuerpo de la solicitud
-    return axios.post('https://wikideas-production.up.railway.app/article/articles/create', obj)
+    return axios.post('https://wikideas-production.up.railway.app/article/create', obj)
       .then(res => {
         // Dispatch de la acción de actualización con los datos devueltos de la API
         dispatch( {type: CREATE_ARTICLE,
@@ -81,7 +81,7 @@ export function editArticle(id,obj) {
 
   return dispatch => {
     return axios
-      .patch( `https://wikideas-production.up.railway.app/article/articles/${id}`,obj)
+      .patch( `https://wikideas-production.up.railway.app/article/update/${id}`,obj)
       .then((res) => {
         dispatch({
           type: UPDATE_ARTICLE,
@@ -96,7 +96,7 @@ export function editArticle(id,obj) {
 export function deleteArticle(id) {
   return dispatch=> {
     return axios
-      .delete( `https://wikideas-production.up.railway.app/article/articles/${id}`)
+      .delete( `https://wikideas-production.up.railway.app/article/delete/${id}`)
       .then((res) => {
         dispatch({
           type: DELETE_ARTICLE,
