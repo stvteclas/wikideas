@@ -7,7 +7,7 @@ export const FILTER_BY_CATEGORY = "FILTER_BY_CATEGORY";
 export const CREATE_ARTICLE = "CREATE_ARTICLE";
 export const DELETE_ARTICLE = "DELETE_ARTICLE";
 export const UPDATE_ARTICLE = "UPDATE_ARTICLE";
-export const REFRESH="REFRESH";
+
 export const SHOW_LOADING="SHOW_LOADING"
 
 
@@ -107,13 +107,7 @@ export function deleteArticle(id) {
   };
 }
 
-//-----REFRESH-----
 
-export const refresh = () => (dispatch) => {
-  dispatch({
-    type: REFRESH,
-  });
-};
 //-----HIDE LOADING-----
 
 export const showLoading = () => (dispatch) => {

@@ -1,5 +1,5 @@
 import {
-    GET_ARTICLES, GET_ARTICLE_BY_ID, FILTER_BY_CATEGORY, GET_THEMES, CREATE_ARTICLE, DELETE_ARTICLE, UPDATE_ARTICLE, REFRESH, SHOW_LOADING
+    GET_ARTICLES, GET_ARTICLE_BY_ID, FILTER_BY_CATEGORY, GET_THEMES, CREATE_ARTICLE, DELETE_ARTICLE, UPDATE_ARTICLE, SHOW_LOADING
   
   } from "../actions";
   const initialState = {
@@ -54,11 +54,7 @@ import {
                       articles: state.articles,
                 
                                           };
-                                          case REFRESH:
-                                            return {
-                                              ...state,
-                                              loading: true,
-                                            };
+                                        
                                             case SHOW_LOADING:
                                               return {
                                                 ...state,

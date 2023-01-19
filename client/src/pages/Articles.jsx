@@ -5,7 +5,7 @@ import image from "../images/hoya.webp";
 import {HiChevronDoubleRight} from "react-icons/hi"
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { filterByCategorie, getArticles, getThemes, refresh, showLoading } from '../redux/actions';
+import { filterByCategorie, getArticles, getThemes,  showLoading } from '../redux/actions';
 import Loader from '../components/Loader';
 
 
@@ -85,7 +85,7 @@ const Articles = () => {
                               <div className={s.specs}>
                                 <h5>{article?.title}</h5>
                                 <p>
-                                  {article && article?.text?.slice(0, 40)}...
+                                  {article && article?.text?.slice(0, 35)}...
                                 </p>
                                 <div
                                   className={s.more}

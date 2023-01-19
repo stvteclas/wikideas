@@ -43,6 +43,8 @@ const Article = () => {
   function handleBack() {
     dispatch(showLoading());
     navigate(-1);
+    window.scrollTo(0, {behavior: 'smooth'})
+
   }
 
   return (
