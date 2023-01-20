@@ -22,14 +22,9 @@ import java.util.List;
 public class ArticleController {
     private final ArticleService articleService;
 
-    @RequestMapping(value = "/create", method = {RequestMethod.OPTIONS})
-    public void getOptions(){
-        log.info( "method options catch" );
-    }
 
     @PostMapping("/create")
     public ResponseEntity<ArticleResponseDTO> createArticle(@RequestBody ArticleDTO article) {
-        log.info( "post/create controller" );
         return articleService.createArticle(article);
     }
 
