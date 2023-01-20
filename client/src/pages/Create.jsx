@@ -107,9 +107,10 @@ const handleContent = (e) => {
         }).then((result) => {
             if (result.isConfirmed) {
                 let obj={title, text:content,image,theme:categories}
+                console.log(obj)
                 dispatch(createArticle(obj));
                 Swal.fire('Saved!', '', 'success')
-                window.location.reload();
+          
            
             } 
         });
