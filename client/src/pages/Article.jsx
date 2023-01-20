@@ -31,10 +31,11 @@ const Article = () => {
         dispatch(deleteArticle(id));
         Swal.fire("Deleted!", "", "success");
         dispatch(showLoading())
-        navigate("/articles");
-        window.location.reload(false);
+        navigate("/");
+       
       }
     });
+  
   }
 
   const article = useSelector((state) => state.articlesReducers.article);

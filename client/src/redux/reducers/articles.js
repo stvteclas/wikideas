@@ -47,7 +47,10 @@ import {
               case CREATE_ARTICLE:
                 return action.payload;
                 case DELETE_ARTICLE:
-                  return action.payload;
+                 return {
+                    ...state,
+                    articles: state.articles,
+                 }
                   case UPDATE_ARTICLE:
                     return{
                       ...state,

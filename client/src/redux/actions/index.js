@@ -65,7 +65,6 @@ export function getThemes() {
 
 //----------Create Article------------
 export function createArticle(obj) {
-
   return dispatch => {
     // Hace la petición POST y envía los datos en el cuerpo de la solicitud
     return axios.post('https://wikideas-production.up.railway.app/article/create', obj)
