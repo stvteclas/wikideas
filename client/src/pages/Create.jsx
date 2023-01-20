@@ -109,7 +109,7 @@ const handleContent = (e) => {
                 let obj={title, text:content,image,theme:categories}
                 dispatch(createArticle(obj));
                 Swal.fire('Saved!', '', 'success')
-                window.location.reload();
+          
            
             } 
         });

@@ -3,7 +3,7 @@ import s from "../styles/home.module.css"
 
 import oek from "../images/oec.webp"
 import SearchBar from '../components/SearchBar';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { showLoading } from '../redux/actions';
 
 
@@ -15,7 +15,7 @@ const Home = () => {
   useEffect(()=>{
 dispatch(showLoading())
 
-  },[])
+  },[dispatch])
 
 
 
