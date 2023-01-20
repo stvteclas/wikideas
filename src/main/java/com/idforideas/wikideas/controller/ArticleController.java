@@ -5,6 +5,7 @@ import com.idforideas.wikideas.dto.ArticleResponseDTO;
 import com.idforideas.wikideas.model.ArticleEntity;
 import com.idforideas.wikideas.service.ArticleService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +16,20 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@Slf4j
 @CrossOrigin(origins = "*", methods = {RequestMethod.DELETE, RequestMethod.GET, RequestMethod.PATCH, RequestMethod.POST})
-@RequestMapping(value = "/article", method={RequestMethod.OPTIONS,RequestMethod.POST})
+@RequestMapping(value = "/article")
 public class ArticleController {
     private final ArticleService articleService;
 
+    @RequestMapping(value = "/create", method = {RequestMethod.OPTIONS})
+    public void getOptions(){
+        log.info( "method options catch" );
+    }
+
     @PostMapping("/create")
     public ResponseEntity<ArticleResponseDTO> createArticle(@RequestBody ArticleDTO article) {
+        log.info( "post/create controller" );
         return articleService.createArticle(article);
     }
 
